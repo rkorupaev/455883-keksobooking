@@ -1,7 +1,7 @@
-# Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
+﻿# Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Роман Корупаев](https://up.htmlacademy.ru/javascript/16/user/455883).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Дос](https://htmlacademy.ru/profile/andreydos).
 
 ---
 
