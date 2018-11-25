@@ -41,9 +41,10 @@ function createAnnouncment() {
 var test = createAnnouncment();
 console.log(test);
 
-var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
 function createPinsDom(announcmentsArray) {
+
+  var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var pins = [];
   for (var i = 0; i < announcmentsArray.length; i++) {
     pins[i] = pinTemplate.cloneNode(true);
@@ -56,21 +57,17 @@ function createPinsDom(announcmentsArray) {
 
 console.log(createPinsDom(test));
 
-// var pin = pinTemplate.cloneNode(true);
-// var pin2 = pinTemplate.cloneNode(true);
-// var pin3 = pinTemplate.cloneNode(true);
-// pin2.style = 'left: ' + announcments[1].location.x + 'px; top: ' + announcments[1].location.y + 'px;';
-// pin3.style = 'left: 100px; top: 100px;';
-// pin2.querySelector('img').src = announcments[4].author.avatar;
-// pin2.querySelector('img').alt = announcments[4].offer.title;
+function placePins(pinsArray) {
+  var pinList = document.querySelector('.map__pins');
+  var fragment = document.createDocumentFragment();
 
-// console.log(pin2);
-// console.log(pin);
+  for (var i = 0; i < pinsArray.length; i++) {
+    fragment.appendChild(pinsArray[i]);
+  }
+  pinList.appendChild(fragment);
+}
 
-// var pinList = document.querySelector('.map__pins');
-
-// pinList.appendChild(pin2);
-// pinList.appendChild(pin3);
+placePins(createPinsDom(test));
 
 
 function getRandomNumber(rangeMin, rangeMax) {
