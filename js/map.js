@@ -30,8 +30,8 @@ function createAnnouncment() {
       },
 
       location: {
-        x: getRandomNumber(0, 700),
-        y: getRandomNumber(130, 630)
+        x: getRandomNumber(0, 700) - 25,
+        y: getRandomNumber(130, 630) - 70
       }
     }
   }
