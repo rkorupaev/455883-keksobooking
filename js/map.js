@@ -1,38 +1,46 @@
-var anouncments = [];
-var featuresArray = ['wifi', 'dishwasher', 'parking'];
-var photosArray = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
-];
-var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
-var types = ['palace, flat, house,bungalo']
 var pins = [];
 
-for (var i = 0; i < 8; i++) {
-  anouncments[i] = {
+function createAnouncment() {
+  var anouncments = [];
+  var featuresArray = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+  var photosArray = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+    'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
+  ];
+  var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
+  var types = ['palace, flat, house,bungalo'];
+  var times = ['12:00', '13:00', '14:00'];
 
-    author: {
-      avatar: 'img/avatars/user0' + (i + 1) + '.png'
-    },
+  for (var i = 0; i < 8; i++) {
+    anouncments[i] = {
 
-    offer: {
-      title: titles[i],
-      adress: anouncments[i].location.x, anouncments[i].location.y,
-      price: 10000 + 10000 * i,
-      type: 'flat',
-      rooms: 2,
-      guests: 3,
-      checkin: '12:00',
-      checkout: '13:00',
-      features: featuresArray[0],
-      photos: photosArray
-    },
+      author: {
+        avatar: 'img/avatars/user0' + (i + 1) + '.png'
+      },
 
-    location: {
-      x: 150,
-      y: 250
+      offer: {
+        title: titles[i],
+        // adress: '' + anouncments[i].location.x + ',' + anouncments[i].location.y + '',
+        price: getRandomNumber(1000, 1000000),
+        type: types[getRandomNumber(0, 3)],
+        rooms: getRandomNumber(1, 5),
+        guests: getRandomNumber(1, 9),
+        checkin: times[getRandomNumber(0, 2)],
+        checkout: times[getRandomNumber(0, 2)],
+        features: featuresArray,
+        description: '',
+        photos: photosArray
+      },
+
+      location: {
+        x: getRandomNumber(0, 700),
+        y: getRandomNumber(130, 630)
+      }
     }
   }
+  return anouncments;
 }
+
+console.log(createAnouncment());
 
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 // console.log(pinTemplate);
@@ -53,6 +61,6 @@ pinList.appendChild(pin2);
 pinList.appendChild(pin3);
 
 
-  function getRandomNumber(rangeMin, rangeMax) {
-    return Math.floor(Math.random() * (rangeMax - rangeMin) + rangeMin);
-  }
+function getRandomNumber(rangeMin, rangeMax) {
+  return Math.floor(Math.random() * (rangeMax - rangeMin) + rangeMin);
+}
