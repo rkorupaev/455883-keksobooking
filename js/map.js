@@ -3,6 +3,8 @@ var featuresArray = ['wifi', 'dishwasher', 'parking'];
 var photosArray = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
 ];
+var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
+var types = ['palace, flat, house,bungalo']
 var pins = [];
 
 for (var i = 0; i < 8; i++) {
@@ -13,8 +15,8 @@ for (var i = 0; i < 8; i++) {
     },
 
     offer: {
-      title: 'Маленькая неуютная квартира',
-      adress: '600, 350',
+      title: titles[i],
+      adress: anouncments[i].location.x, anouncments[i].location.y,
       price: 10000 + 10000 * i,
       type: 'flat',
       rooms: 2,
@@ -49,3 +51,8 @@ var pinList = document.querySelector('.map__pins');
 
 pinList.appendChild(pin2);
 pinList.appendChild(pin3);
+
+
+  function getRandomNumber(rangeMin, rangeMax) {
+    return Math.floor(Math.random() * (rangeMax - rangeMin) + rangeMin);
+  }
