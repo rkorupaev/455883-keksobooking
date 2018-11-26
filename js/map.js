@@ -74,7 +74,7 @@ function placePins(pinsArray) {
 placePins(createPinsDom(announcementsArray));
 
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
-var cards = [];
+
 card2 = cardTemplate.cloneNode(true);
 card2.querySelector('.popup__title').textContent = announcementsArray[0].offer.title;
 card2.querySelector('.popup__text--address').textContent = announcementsArray[0].offer.adress;
