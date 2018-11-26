@@ -121,18 +121,19 @@ for (var i = 0; i < announcementsArray[0].offer.photos.length; i++) {
 
 
 function convertToFullName(name) {
+  var fullName = '';
   switch (name) {
     case 'flat':
-      var fullName = 'Квартира';
+      fullName = 'Квартира';
       break;
     case 'palace':
-      var fullName = 'Дворец';
+      fullName = 'Дворец';
       break;
     case 'bungalo':
-      var fullName = 'Бунгало';
+      fullName = 'Бунгало';
       break;
     case 'house':
-      var fullName = 'Дом';
+      fullName = 'Дом';
       break;
   }
   return fullName;
