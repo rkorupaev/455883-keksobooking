@@ -87,8 +87,10 @@ card2.querySelector('.popup__description').textContent = announcmentsArray[0].of
 
 console.log(card2);
 
+
+var mapFilterContainer = document.querySelector('.map__filters-container');
 var cardList = document.querySelector('.map');
-cardList.appendChild(card2);
+cardList.insertBefore(card2, mapFilterContainer);
 
 var avatarImagerSrc = document.querySelector('.popup__avatar').src = announcmentsArray[0].author.avatar;
 
