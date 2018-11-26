@@ -1,5 +1,5 @@
-function createAnnouncment() {
-  var announcments = [];
+function createAnnouncement() {
+  var announcements = [];
   var featuresArray = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var photosArray = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
     'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
@@ -13,7 +13,7 @@ function createAnnouncment() {
     var locationX = getRandomNumber(0, 700) - 25;
     var locationY = getRandomNumber(130, 630) - 70;
 
-    announcments[i] = {
+    announcements[i] = {
 
       author: {
         avatar: 'img/avatars/user0' + (i + 1) + '.png'
@@ -39,11 +39,11 @@ function createAnnouncment() {
       }
     }
   }
-  return announcments;
+  return announcements;
 }
 
-var announcmentsArray = createAnnouncment();
-console.log(announcmentsArray);
+var announcementsArray = createAnnouncement();
+console.log(announcementsArray);
 
 
 function createPinsDom(array) {
@@ -59,7 +59,7 @@ function createPinsDom(array) {
   return pins;
 }
 
-console.log(createPinsDom(announcmentsArray));
+console.log(createPinsDom(announcementsArray));
 
 function placePins(pinsArray) {
   var pinList = document.querySelector('.map__pins');
@@ -71,19 +71,19 @@ function placePins(pinsArray) {
   pinList.appendChild(fragment);
 }
 
-placePins(createPinsDom(announcmentsArray));
+placePins(createPinsDom(announcementsArray));
 
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 var cards = [];
 card2 = cardTemplate.cloneNode(true);
-card2.querySelector('.popup__title').textContent = announcmentsArray[0].offer.title;
-card2.querySelector('.popup__text--address').textContent = announcmentsArray[0].offer.adress;
-card2.querySelector('.popup__text--price').textContent = announcmentsArray[0].offer.price + '₽/ночь';
-card2.querySelector('.popup__type').textContent = convertToFullName(announcmentsArray[0].offer.type);
-card2.querySelector('.popup__text--capacity').textContent = announcmentsArray[0].offer.rooms + ' комнаты для ' + announcmentsArray[0].offer.guests + ' гостей.';
-card2.querySelector('.popup__text--time').textContent = 'Заезд после ' + announcmentsArray[0].offer.checkin + ', выезд до ' + announcmentsArray[0].offer.checkout;
-card2.querySelector('.popup__features').querySelector('li').textContent = announcmentsArray[0].offer.features;
-card2.querySelector('.popup__description').textContent = announcmentsArray[0].offer.description;
+card2.querySelector('.popup__title').textContent = announcementsArray[0].offer.title;
+card2.querySelector('.popup__text--address').textContent = announcementsArray[0].offer.adress;
+card2.querySelector('.popup__text--price').textContent = announcementsArray[0].offer.price + '₽/ночь';
+card2.querySelector('.popup__type').textContent = convertToFullName(announcementsArray[0].offer.type);
+card2.querySelector('.popup__text--capacity').textContent = announcementsArray[0].offer.rooms + ' комнаты для ' + announcementsArray[0].offer.guests + ' гостей.';
+card2.querySelector('.popup__text--time').textContent = 'Заезд после ' + announcementsArray[0].offer.checkin + ', выезд до ' + announcementsArray[0].offer.checkout;
+card2.querySelector('.popup__features').querySelector('li').textContent = announcementsArray[0].offer.features;
+card2.querySelector('.popup__description').textContent = announcementsArray[0].offer.description;
 
 console.log(card2);
 
@@ -92,7 +92,7 @@ var mapFilterContainer = document.querySelector('.map__filters-container');
 var cardList = document.querySelector('.map');
 cardList.insertBefore(card2, mapFilterContainer);
 
-var avatarImagerSrc = document.querySelector('.popup__avatar').src = announcmentsArray[0].author.avatar;
+var avatarImagerSrc = document.querySelector('.popup__avatar').src = announcementsArray[0].author.avatar;
 
 
 function makePhotoBlock(array) {
@@ -108,14 +108,14 @@ function makePhotoBlock(array) {
   photoBlock.appendChild(fragment);
 }
 
-makePhotoBlock(announcmentsArray[0].offer.photos);
+makePhotoBlock(announcementsArray[0].offer.photos);
 
 
 var element = document.querySelectorAll('.popup__photo');
 console.log(element);
 
-for (var i = 0; i < announcmentsArray[0].offer.photos.length; i++) {
-  element[i].src = announcmentsArray[0].offer.photos[i];
+for (var i = 0; i < announcementsArray[0].offer.photos.length; i++) {
+  element[i].src = announcementsArray[0].offer.photos[i];
 }
 
 
