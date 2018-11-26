@@ -82,7 +82,7 @@ card2.querySelector('.popup__text--price').textContent = announcmentsArray[0].of
 card2.querySelector('.popup__type').textContent = convertToFullName(announcmentsArray[0].offer.type);
 card2.querySelector('.popup__text--capacity').textContent = announcmentsArray[0].offer.rooms + ' комнаты для ' + announcmentsArray[0].offer.guests + ' гостей.';
 card2.querySelector('.popup__text--time').textContent = 'Заезд после ' + announcmentsArray[0].offer.checkin + ', выезд до ' + announcmentsArray[0].offer.checkout;
-card2.querySelector('.popup__features').textContent = announcmentsArray[0].offer.features;
+card2.querySelector('.popup__features').querySelector('li').textContent = announcmentsArray[0].offer.features;
 card2.querySelector('.popup__description').textContent = announcmentsArray[0].offer.description;
 card2.querySelector('.popup__photos').querySelector('img').src = announcmentsArray[0].offer.photos[0];
 
