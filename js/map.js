@@ -9,6 +9,10 @@ function createAnnouncment() {
   var times = ['12:00', '13:00', '14:00'];
 
   for (var i = 0; i < 8; i++) {
+
+    var locationX = getRandomNumber(0, 700) - 25;
+    var locationY = getRandomNumber(130, 630) - 70;
+
     announcments[i] = {
 
       author: {
@@ -17,7 +21,7 @@ function createAnnouncment() {
 
       offer: {
         title: titles[i],
-        // adress: '' + announcments[i].location.x + ',' + announcments[i].location.y + '',
+        adress: '' + locationX + ', ' + locationY + '',
         price: getRandomNumber(1000, 1000000),
         type: types[getRandomNumber(0, 3)],
         rooms: getRandomNumber(1, 5),
@@ -30,8 +34,8 @@ function createAnnouncment() {
       },
 
       location: {
-        x: getRandomNumber(0, 700) - 25,
-        y: getRandomNumber(130, 630) - 70
+        x: locationX,
+        y: locationY
       }
     }
   }
