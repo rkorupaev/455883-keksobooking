@@ -84,7 +84,6 @@ card2.querySelector('.popup__text--capacity').textContent = announcmentsArray[0]
 card2.querySelector('.popup__text--time').textContent = 'Заезд после ' + announcmentsArray[0].offer.checkin + ', выезд до ' + announcmentsArray[0].offer.checkout;
 card2.querySelector('.popup__features').querySelector('li').textContent = announcmentsArray[0].offer.features;
 card2.querySelector('.popup__description').textContent = announcmentsArray[0].offer.description;
-card2.querySelector('.popup__photos').querySelector('img').src = announcmentsArray[0].offer.photos[0];
 
 console.log(card2);
 
@@ -99,17 +98,24 @@ function makePhotoBlock(array) {
   var imgTag = document.querySelector('.popup__photos').querySelector('img');
   var photoBlock = document.querySelector('.popup__photos');
   var fragment = document.createDocumentFragment();
-  for (var i = 0; i < array.length; i++) {
+  for (var i = 0; i < array.length - 1; i++) {
     photos[i] = imgTag.cloneNode(true);
-    // photos[i].querySelector('.popup__photo').src = array[i];
-    console.log(photos[i]);
+
     fragment.appendChild(photos[i]);
   }
   photoBlock.appendChild(fragment);
-  console.log(photoBlock);
 }
 
 makePhotoBlock(announcmentsArray[0].offer.photos);
+
+
+var element = document.querySelectorAll('.popup__photo');
+console.log(element);
+
+for (var i = 0; i < announcmentsArray[0].offer.photos.length; i++) {
+  element[i].src = announcmentsArray[0].offer.photos[i];
+}
+
 
 
 function convertToFullName(name) {
