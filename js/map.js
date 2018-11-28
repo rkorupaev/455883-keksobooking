@@ -1,6 +1,13 @@
 function createAnnouncement() {
   var announcements = [];
+  var featuresArrayChanged = [];
+
   var featuresArray = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+  featuresArrayChanged.length = getRandomNumber(1, 6);
+  for (var i = 0; i < featuresArrayChanged.length; i++) {
+    featuresArrayChanged[i] = featuresArray[i];
+  }
+  console.log(featuresArrayChanged);
   var photosArray = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
     'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
   ];
@@ -28,7 +35,7 @@ function createAnnouncement() {
         guests: getRandomNumber(1, 9),
         checkin: times[getRandomNumber(0, 2)],
         checkout: times[getRandomNumber(0, 2)],
-        features: featuresArray,
+        features: featuresArrayChanged,
         description: '',
         photos: photosArray
       },
