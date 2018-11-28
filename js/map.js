@@ -1,5 +1,7 @@
-function createAnnouncement() {
   'use strict';
+
+function createAnnouncement() {
+
   var announcements = [];
   var featuresArrayChanged = [];
 
@@ -82,50 +84,53 @@ placePins(createPinsDom(announcementsArray));
 
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
-card2 = cardTemplate.cloneNode(true);
-card2.querySelector('.popup__title').textContent = announcementsArray[0].offer.title;
-card2.querySelector('.popup__text--address').textContent = announcementsArray[0].offer.adress;
-card2.querySelector('.popup__text--price').textContent = announcementsArray[0].offer.price + '₽/ночь';
-card2.querySelector('.popup__type').textContent = convertToFullName(announcementsArray[0].offer.type);
-card2.querySelector('.popup__text--capacity').textContent = announcementsArray[0].offer.rooms + ' комнаты для ' + announcementsArray[0].offer.guests + ' гостей.';
-card2.querySelector('.popup__text--time').textContent = 'Заезд после ' + announcementsArray[0].offer.checkin + ', выезд до ' + announcementsArray[0].offer.checkout;
-card2.querySelector('.popup__description').textContent = announcementsArray[0].offer.description;
+var card = cardTemplate.cloneNode(true);
+card.querySelector('.popup__title').textContent = announcementsArray[0].offer.title;
+card.querySelector('.popup__text--address').textContent = announcementsArray[0].offer.adress;
+card.querySelector('.popup__text--price').textContent = announcementsArray[0].offer.price + '₽/ночь';
+card.querySelector('.popup__type').textContent = convertToFullName(announcementsArray[0].offer.type);
+card.querySelector('.popup__text--capacity').textContent = announcementsArray[0].offer.rooms + ' комнаты для ' + announcementsArray[0].offer.guests + ' гостей.';
+card.querySelector('.popup__text--time').textContent = 'Заезд после ' + announcementsArray[0].offer.checkin + ', выезд до ' + announcementsArray[0].offer.checkout;
+card.querySelector('.popup__description').textContent = announcementsArray[0].offer.description;
+// for (var i = 0; i < announcementsArray[0].offer.features.length; i++) {
+//   card.querySelector('.popup__feature--wifi').textContent = announcementsArray[0].offer.features[i];
+//   switch (announcementsArray[0].offer.features[i]) {
+//     case 'wifi':
+//       card.querySelector('.popup__feature--wifi').textContent = announcementsArray[0].offer.features[i];
+//       break;
+//     case 'dishwasher':
+//       card.querySelector('.popup__feature--dishwasher').textContent = announcementsArray[0].offer.features[i];
+//       break;
+//     case 'parking':
+//       card.querySelector('.popup__feature--parking').textContent = announcementsArray[0].offer.features[i];
+//       break;
+//     case 'washer':
+//       card.querySelector('.popup__feature--washer').textContent = announcementsArray[0].offer.features[i];
+//       break;
+//     case 'elevator':
+//       card.querySelector('.popup__feature--elevator').textContent = announcementsArray[0].offer.features[i];
+//       break;
+//     case 'conditioner':
+//       card.querySelector('.popup__feature--conditioner').textContent = announcementsArray[0].offer.features[i];
+//       break;
+//   }
+// }
+
+var featuresNodesArray = card.querySelectorAll('.popup__feature');
+
 for (var i = 0; i < announcementsArray[0].offer.features.length; i++) {
-  switch (announcementsArray[0].offer.features[i]) {
-    case 'wifi':
-      card2.querySelector('.popup__feature--wifi').textContent = announcementsArray[0].offer.features[i];
-      break;
-    case 'dishwasher':
-      card2.querySelector('.popup__feature--dishwasher').textContent = announcementsArray[0].offer.features[i];
-      break;
-    case 'parking':
-      card2.querySelector('.popup__feature--parking').textContent = announcementsArray[0].offer.features[i];
-      break;
-    case 'washer':
-      card2.querySelector('.popup__feature--washer').textContent = announcementsArray[0].offer.features[i];
-      break;
-    case 'elevator':
-      card2.querySelector('.popup__feature--elevator').textContent = announcementsArray[0].offer.features[i];
-      break;
-    case 'conditioner':
-      card2.querySelector('.popup__feature--conditioner').textContent = announcementsArray[0].offer.features[i];
-      break;
+  for (var j = 0; j < featuresNodesArray.length; j++) {
+    if (featuresNodesArray[i] === 0) {
+      featuresNodesArray[i].parentNode.removeChild(featuresNodesArray[i]);
+    }
   }
 }
 
-var featuresNodesArray = card2.querySelectorAll('.popup__feature');
-
-for (var i = 0; i < featuresNodesArray.length; i++) {
-  if (featuresNodesArray[i].textContent.length === 0) {
-    featuresNodesArray[i].parentNode.removeChild(featuresNodesArray[i]);
-  }
-}
-
-console.log(card2);
+console.log(card);
 
 var mapFilterContainer = document.querySelector('.map__filters-container');
 var cardList = document.querySelector('.map');
-cardList.insertBefore(card2, mapFilterContainer);
+cardList.insertBefore(card, mapFilterContainer);
 
 var avatarImagerSrc = document.querySelector('.popup__avatar').src = announcementsArray[0].author.avatar;
 
@@ -177,4 +182,3 @@ function convertToFullName(name) {
 function getRandomNumber(rangeMin, rangeMax) {
   return Math.floor(Math.random() * (rangeMax - rangeMin) + rangeMin);
 }
-
