@@ -113,19 +113,15 @@ for (var i = 0; i < announcementsArray[0].offer.features.length; i++) {
   }
 }
 
-console.log(card2);
-console.log(card2.querySelectorAll('.popup__feature')[1].textContent);
 var featuresNodesArray = card2.querySelectorAll('.popup__feature');
-console.log(featuresNodesArray);
-console.log(featuresNodesArray[1]);
 
 for (var i = 0; i < featuresNodesArray.length; i++) {
-    if (featuresNodesArray[i].textContent.length === 0) {
-        featuresNodesArray[i].parentNode.removeChild(featuresNodesArray[i]);
-    }
+  if (featuresNodesArray[i].textContent.length === 0) {
+    featuresNodesArray[i].parentNode.removeChild(featuresNodesArray[i]);
+  }
 }
 
-console.log(card2.querySelectorAll('.popup__feature'));
+console.log(card2);
 
 var mapFilterContainer = document.querySelector('.map__filters-container');
 var cardList = document.querySelector('.map');
@@ -181,3 +177,4 @@ function convertToFullName(name) {
 function getRandomNumber(rangeMin, rangeMax) {
   return Math.floor(Math.random() * (rangeMax - rangeMin) + rangeMin);
 }
+
