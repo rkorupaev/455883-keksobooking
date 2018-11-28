@@ -28,7 +28,7 @@ function createAnnouncement() {
 
       offer: {
         title: titles[i],
-        adress: '' + locationX + ', ' + locationY + '',
+        adress: locationX + ', ' + locationY,
         price: getRandomNumber(1000, 1000000),
         type: types[getRandomNumber(0, 3)],
         rooms: getRandomNumber(1, 5),
