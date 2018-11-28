@@ -1,4 +1,5 @@
 function createAnnouncement() {
+  'use strict';
   var announcements = [];
   var featuresArrayChanged = [];
 
@@ -7,7 +8,6 @@ function createAnnouncement() {
   for (var i = 0; i < featuresArrayChanged.length; i++) {
     featuresArrayChanged[i] = featuresArray[i];
   }
-  console.log(featuresArrayChanged);
   var photosArray = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
     'http://o0.github.io/assets/images/tokyo/hotel3.jpg'
   ];
@@ -89,11 +89,31 @@ card2.querySelector('.popup__text--price').textContent = announcementsArray[0].o
 card2.querySelector('.popup__type').textContent = convertToFullName(announcementsArray[0].offer.type);
 card2.querySelector('.popup__text--capacity').textContent = announcementsArray[0].offer.rooms + ' комнаты для ' + announcementsArray[0].offer.guests + ' гостей.';
 card2.querySelector('.popup__text--time').textContent = 'Заезд после ' + announcementsArray[0].offer.checkin + ', выезд до ' + announcementsArray[0].offer.checkout;
-card2.querySelector('.popup__features').querySelector('li').textContent = announcementsArray[0].offer.features;
 card2.querySelector('.popup__description').textContent = announcementsArray[0].offer.description;
+for (var i = 0; i < announcementsArray[0].offer.features.length; i++) {
+  switch (announcementsArray[0].offer.features[i]) {
+    case 'wifi':
+      card2.querySelector('.popup__feature--wifi').textContent = announcementsArray[0].offer.features[i];
+      break;
+    case 'dishwasher':
+      card2.querySelector('.popup__feature--dishwasher').textContent = announcementsArray[0].offer.features[i];
+      break;
+    case 'parking':
+      card2.querySelector('.popup__feature--parking').textContent = announcementsArray[0].offer.features[i];
+      break;
+    case 'washer':
+      card2.querySelector('.popup__feature--washer').textContent = announcementsArray[0].offer.features[i];
+      break;
+    case 'elevator':
+      card2.querySelector('.popup__feature--elevator').textContent = announcementsArray[0].offer.features[i];
+      break;
+    case 'conditioner':
+      card2.querySelector('.popup__feature--conditioner').textContent = announcementsArray[0].offer.features[i];
+      break;
+  }
+}
 
 console.log(card2);
-
 
 var mapFilterContainer = document.querySelector('.map__filters-container');
 var cardList = document.querySelector('.map');
