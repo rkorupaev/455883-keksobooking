@@ -4,8 +4,8 @@ function createAnnouncement() {
   var featuresArrayChanged = [];
 
   var featuresArray = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-  featuresArrayChanged.length = getRandomNumber(1, 6);
-  for (var i = 0; i < featuresArrayChanged.length; i++) {
+  var featuresLength = getRandomNumber(1, 6);
+  for (var i = 0; i < featuresLength; i++) {
     featuresArrayChanged[i] = featuresArray[i];
   }
   var photosArray = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
