@@ -232,7 +232,7 @@
     var closeButton = document.querySelector('.popup__close');
 
     onCardCloseButtonClickHandler(closeButton, map, articleDom);
-    onCardEscKeydownHandler(map, articleDom);
+    onEscKeydownHandler(map, articleDom);
   }
 
   function onCardCloseButtonClickHandler(button, container, element) {
@@ -241,7 +241,7 @@
     });
   }
 
-  function onCardEscKeydownHandler(container, element) {
+  function onEscKeydownHandler(container, element) {
     document.addEventListener('keydown', function(evt) {
       if (evt.keyCode === 27) {
         element.parentNode.removeChild(element);
@@ -276,3 +276,177 @@
   function getRandomNumber(rangeMin, rangeMax) {
     return Math.floor(Math.random() * (rangeMax - rangeMin) + rangeMin);
   }
+
+  function setMaxMinLengthErrorMessage(node, maxMessage, minMessage) {
+    node.addEventListener('input', function() {
+      if (node.value.length >= 100) {
+        node.setCustomValidity(maxMessage);
+      } else if (node.value.length <= 30) {
+        node.setCustomValidity(minMessage);
+      } else {
+        node.setCustomValidity('');
+      }
+    });
+  }
+
+  function setMaxMinPriceErrorMessage(node, message, price) {
+    node.addEventListener('input', function() {
+      if (node.value >= 1000000) {
+        node.setCustomValidity(message);
+      } else if (node.value <= price) {
+        node.setCustomValidity(message);
+      } else {
+        node.setCustomValidity('');
+      }
+    });
+  }
+
+  function editForm() {
+    var form = document.querySelector('.ad-form');
+    var titleInput = form.querySelector('#title');
+    var priceInput = form.querySelector('#price');
+    titleInput.required = true;
+
+    setMaxMinLengthErrorMessage(titleInput, 'Адрес должен быть не длинне 100 символов.', 'Адрес должен быть не короче 30 символов.');
+    priceInput.required = true;
+
+    var type = form.querySelector('#type');
+    var minPrice = 1000;
+    var price = form.querySelector('#price');
+    price.placeholder = '1000';
+
+    type.addEventListener('change', function() {
+      var typeIndex = form.querySelector('#type').selectedIndex;
+      switch (typeIndex) {
+        case 0:
+          minPrice = 0;
+          price.placeholder = '0';
+          break;
+        case 1:
+          minPrice = 1000;
+          price.placeholder = '1000';
+          break;
+        case 2:
+          minPrice = 5000;
+          price.placeholder = '5000';
+          break;
+        case 3:
+          minPrice = 10000;
+          price.placeholder = '10000';
+          break;
+      }
+      console.log(minPrice);
+    });
+
+    price.addEventListener('input', function() {
+      if (price.value >= 1000000 || price.value <= price) {
+        price.setCustomValidity('Цена за ночь должна быть от ' + minPrice + ' до 1000000.');
+      } else {
+        price.setCustomValidity('');
+      }
+    });
+
+
+
+    var timeIn = form.querySelector('#timein');
+    var timeOut = form.querySelector('#timeout');
+    onSelectTimeInOutChangeHandler(timeIn, timeOut);
+    onSelectTimeInOutChangeHandler(timeOut, timeIn);
+
+    var roomsNumber = form.querySelector('#room_number');
+    var capacity = form.querySelector('#capacity');
+
+    var roomsSelectedIndex = roomsNumber.selectedIndex;
+    var capacitySelectedIndex = capacity.selectedIndex;
+
+    for (var i = 0; i < roomsNumber.length; i++) {
+      if (roomsNumber.selectedIndex === i) {
+        capacity.selectedIndex = setInitialRoomAndGuestNumber(roomsSelectedIndex, capacitySelectedIndex);
+        capacity[0].disabled = true;
+        capacity[1].disabled = true;
+        capacity[3].disabled = true;
+      }
+    }
+
+    roomsNumber.addEventListener('change', function() {
+      switch (roomsNumber.selectedIndex) {
+        case 0:
+          capacity[0].disabled = true;
+          capacity[1].disabled = true;
+          capacity[2].disabled = false;
+          capacity[3].disabled = true;
+          break;
+        case 1:
+          capacity[0].disabled = true;
+          capacity[1].disabled = false;
+          capacity[3].disabled = true;
+          break;
+        case 2:
+          capacity[0].disabled = false;
+          capacity[1].disabled = false;
+          capacity[3].disabled = true;
+          break;
+        case 3:
+          capacity[0].disabled = true;
+          capacity[1].disabled = true;
+          capacity[2].disabled = true;
+          capacity[3].disabled = false;
+          break;
+
+      }
+    });
+  }
+
+
+  editForm();
+
+  function onSelectTimeInOutChangeHandler(changedNode, changableNode) {
+    changedNode.addEventListener('change', function() {
+      var index;
+      index = changedNode.selectedIndex;
+      changableNode.selectedIndex = index;
+    });
+  }
+
+  function setInitialRoomAndGuestNumber(roomList, capacityList) {
+    var index = capacityList;
+    switch (roomList) {
+      case 0:
+        index = 2;
+        break;
+      case 1:
+        index = 2;
+        break;
+      case 2:
+        index = 2;
+        break;
+      case 3:
+        index = 3;
+        break;
+    }
+    return index;
+  }
+
+
+
+
+
+
+  // (function submitFrom() {
+  //   var submitButton = document.querySelector('.ad-form__submit');
+  //   var main = document.querySelector('main');
+  //   var succesMessageWindowTemplate = document.querySelector('#success').content.querySelector('.success');
+  //   var succesMessageWindow = succesMessageWindowTemplate.cloneNode(true);
+
+  //   submitButton.addEventListener('click', function(evt) {
+  //     evt.preventDefault();
+  //     main.appendChild(succesMessageWindow);
+  //   });
+
+  //   succesMessageWindow.addEventListener('click', function() {
+  //     succesMessageWindow.parentNode.removeChild(succesMessageWindow);
+  //   });
+
+  //   onEscKeydownHandler(main, succesMessageWindow);
+
+  // })();
