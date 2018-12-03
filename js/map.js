@@ -16,12 +16,43 @@
 
     disableElements(fieldsetList);
 
-    pinMain.addEventListener('mouseup', function(evt) {
-      map.classList.remove('map--faded');
-      announcementsFilterForm.classList.remove('ad-form--disabled');
-      enableElements(fieldsetList);
-      setAddressCoordinates(evt.clientX, evt.clientY + 22, addressInput);
-      placePins(createPinsDom(announcementsArray));
+    pinMain.addEventListener('mousedown', function(evt) {
+      evt.preventDefault();
+
+      var initialLocationX = evt.clientX;
+      var initialLocationY = evt.clientY;
+
+      var onMouseMove = function(moveEvt) {
+        moveEvt.preventDefault();
+
+        var shift = {
+          x: initialLocationX - moveEvt.clientX,
+          y: initialLocationY - moveEvt.clientY
+        };
+
+        initialLocationX = moveEvt.clientX;
+        initialLocationY = moveEvt.clientY;
+
+        pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
+        pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
+      };
+
+      var onMouseUp = function(upEvt) {
+        upEvt.preventDefault();
+
+        map.classList.remove('map--faded');
+        announcementsFilterForm.classList.remove('ad-form--disabled');
+        enableElements(fieldsetList);
+        // setAddressCoordinates(evt.clientX, evt.clientY + 22, addressInput);
+        placePins(createPinsDom(announcementsArray));
+
+
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
     });
   }
 
@@ -281,33 +312,39 @@
     node.addEventListener('input', function() {
       if (node.value.length >= 100) {
         node.setCustomValidity(maxMessage);
+
       } else if (node.value.length <= 30) {
         node.setCustomValidity(minMessage);
+
       } else {
         node.setCustomValidity('');
+
       }
     });
   }
 
-  function setMaxMinPriceErrorMessage(node, message, price) {
-    node.addEventListener('input', function() {
-      if (node.value >= 1000000) {
-        node.setCustomValidity(message);
-      } else if (node.value <= price) {
-        node.setCustomValidity(message);
-      } else {
-        node.setCustomValidity('');
-      }
-    });
-  }
+  // function setMaxMinPriceErrorMessage(node, message, price, validity) {
+  //   node.addEventListener('input', function() {
+  //     if (node.value >= 1000000) {
+  //       node.setCustomValidity(message);
+  //       validity = false;
+  //     } else if (node.value <= price) {
+  //       node.setCustomValidity(message);
+  //       validity = false;
+  //     } else {
+  //       node.setCustomValidity('');
+  //       validity = true;
+  //     }
+  //   });
+  // }
 
   function editForm() {
     var form = document.querySelector('.ad-form');
     var titleInput = form.querySelector('#title');
     var priceInput = form.querySelector('#price');
     titleInput.required = true;
-
     setMaxMinLengthErrorMessage(titleInput, 'Адрес должен быть не длинне 100 символов.', 'Адрес должен быть не короче 30 символов.');
+
     priceInput.required = true;
 
     var type = form.querySelector('#type');
@@ -429,24 +466,23 @@
 
 
 
+  (function submitFrom(isValid) {
+    var submitButton = document.querySelector('.ad-form__submit');
+    var main = document.querySelector('main');
+    var succesMessageWindowTemplate = document.querySelector('#success').content.querySelector('.success');
+    var succesMessageWindow = succesMessageWindowTemplate.cloneNode(true);
+    var form = document.querySelector('.ad-form');
 
+    submitButton.addEventListener('click', function(evt) {
 
+      evt.preventDefault();
+      main.appendChild(succesMessageWindow);
 
-  // (function submitFrom() {
-  //   var submitButton = document.querySelector('.ad-form__submit');
-  //   var main = document.querySelector('main');
-  //   var succesMessageWindowTemplate = document.querySelector('#success').content.querySelector('.success');
-  //   var succesMessageWindow = succesMessageWindowTemplate.cloneNode(true);
+    });
 
-  //   submitButton.addEventListener('click', function(evt) {
-  //     evt.preventDefault();
-  //     main.appendChild(succesMessageWindow);
-  //   });
+    succesMessageWindow.addEventListener('click', function() {
+      succesMessageWindow.parentNode.removeChild(succesMessageWindow);
+    });
 
-  //   succesMessageWindow.addEventListener('click', function() {
-  //     succesMessageWindow.parentNode.removeChild(succesMessageWindow);
-  //   });
-
-  //   onEscKeydownHandler(main, succesMessageWindow);
-
-  // })();
+    onEscKeydownHandler(main, succesMessageWindow);
+  })();
