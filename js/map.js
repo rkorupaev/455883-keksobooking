@@ -43,7 +43,7 @@
         map.classList.remove('map--faded');
         announcementsFilterForm.classList.remove('ad-form--disabled');
         enableElements(fieldsetList);
-        // setAddressCoordinates(evt.clientX, evt.clientY + 22, addressInput);
+        setAddressCoordinates(parseInt(pinMain.style.left) + 32, parseInt(pinMain.style.top) + 87, addressInput);
         placePins(createPinsDom(announcementsArray));
 
 
