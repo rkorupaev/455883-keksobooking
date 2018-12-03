@@ -339,7 +339,7 @@
     });
 
     price.addEventListener('input', function() {
-      if (price.value >= 1000000 || price.value <= price) {
+      if (price.value >= 1000000 || price.value <= minPrice) {
         price.setCustomValidity('Цена за ночь должна быть от ' + minPrice + ' до 1000000.');
       } else {
         price.setCustomValidity('');
