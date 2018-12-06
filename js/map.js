@@ -25,6 +25,11 @@
       var onMouseMove = function(moveEvt) {
         moveEvt.preventDefault();
 
+        console.log(parseInt(pinMain.style.top));
+        var tempo = parseInt(pinMain.style.top);
+
+
+
         var shift = {
           x: initialLocationX - moveEvt.clientX,
           y: initialLocationY - moveEvt.clientY
@@ -35,7 +40,11 @@
 
         pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
         pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
+
+
+        setAddressCoordinates(parseInt(pinMain.style.left) + 32, parseInt(pinMain.style.top) + 87, addressInput);
       };
+
 
       var onMouseUp = function(upEvt) {
         upEvt.preventDefault();
@@ -43,7 +52,6 @@
         map.classList.remove('map--faded');
         announcementsFilterForm.classList.remove('ad-form--disabled');
         enableElements(fieldsetList);
-        setAddressCoordinates(parseInt(pinMain.style.left) + 32, parseInt(pinMain.style.top) + 87, addressInput);
         placePins(createPinsDom(announcementsArray));
 
 
@@ -466,23 +474,34 @@
 
 
 
-  (function submitFrom(isValid) {
+  (function submitFrom() {
     var submitButton = document.querySelector('.ad-form__submit');
     var main = document.querySelector('main');
     var succesMessageWindowTemplate = document.querySelector('#success').content.querySelector('.success');
     var succesMessageWindow = succesMessageWindowTemplate.cloneNode(true);
+    var errorMessageWindowTemplate = document.querySelector('#error').content.querySelector('.error');
+    var errorMessageWindow = errorMessageWindowTemplate.cloneNode(true);
     var form = document.querySelector('.ad-form');
 
     submitButton.addEventListener('click', function(evt) {
-
       evt.preventDefault();
-      main.appendChild(succesMessageWindow);
+      if (form.reportValidity() === true) {
+        main.appendChild(succesMessageWindow);
 
+      } else {
+        main.appendChild(errorMessageWindow);
+        errorMessageWindow.querySelector('.error__button').autofocus = true;
+      }
     });
 
     succesMessageWindow.addEventListener('click', function() {
       succesMessageWindow.parentNode.removeChild(succesMessageWindow);
     });
 
+    errorMessageWindow.addEventListener('click', function() {
+      errorMessageWindow.parentNode.removeChild(errorMessageWindow);
+    });
     onEscKeydownHandler(main, succesMessageWindow);
+    onEscKeydownHandler(main, errorMessageWindow);
+
   })();
