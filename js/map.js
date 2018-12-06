@@ -9,7 +9,7 @@
     var announcementsFilterForm = document.querySelector('.ad-form');
     var fieldsetList = announcementsFilterForm.getElementsByTagName('fieldset');
     var addressInput = document.getElementById('address');
-    addressInput.value = INITIAL_POSITION_MAIN_PIN_X + (MAIN_PIN_WIDTH / 2) + ' , ' + (INITIAL_POSITION_MAIN_PIN_Y + 85);
+    addressInput.value = INITIAL_POSITION_MAIN_PIN_X + ' , ' + INITIAL_POSITION_MAIN_PIN_Y;
     addressInput.readOnly = true;
 
     disableElements(fieldsetList);
@@ -80,6 +80,9 @@
     input.value = coordinateX + ' , ' + coordinateY;
   }
 
+  // var map = document.querySelector('.map');
+  // console.log(map.clientWidth);
+  // console.dir(map);
 
   function createAnnouncement() {
 
@@ -97,11 +100,12 @@
     var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
     var types = ['palace', 'flat', 'house', 'bungalo'];
     var times = ['12:00', '13:00', '14:00'];
+    var map = document.querySelector('.map');
 
     for (var i = 0; i < 8; i++) {
 
-      var locationX = getRandomNumber(0, 700) - 25;
-      var locationY = getRandomNumber(130, 630) - 70;
+      var locationX = getRandomNumber(0, map.clientWidth);
+      var locationY = getRandomNumber(130, 630);
 
       announcements[i] = {
 
@@ -503,12 +507,9 @@
     onEscKeydownHandler(main, succesMessageWindow);
     onEscKeydownHandler(main, errorMessageWindow);
 
-    resetButton.addEventListener('click', function(){
+    resetButton.addEventListener('click', function() {
       resetPage();
     });
-
-    console.log(resetButton);
-
   })();
 
 
