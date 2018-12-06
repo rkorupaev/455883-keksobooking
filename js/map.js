@@ -473,13 +473,14 @@
 
 
   (function submitFrom() {
-    var submitButton = document.querySelector('.ad-form__submit');
+    var form = document.querySelector('.ad-form');
+    var submitButton = form.querySelector('.ad-form__submit');
     var main = document.querySelector('main');
     var succesMessageWindowTemplate = document.querySelector('#success').content.querySelector('.success');
     var succesMessageWindow = succesMessageWindowTemplate.cloneNode(true);
     var errorMessageWindowTemplate = document.querySelector('#error').content.querySelector('.error');
     var errorMessageWindow = errorMessageWindowTemplate.cloneNode(true);
-    var form = document.querySelector('.ad-form');
+    var resetButton = form.querySelector('.ad-form__reset');
 
     submitButton.addEventListener('click', function(evt) {
       evt.preventDefault();
@@ -501,6 +502,12 @@
     });
     onEscKeydownHandler(main, succesMessageWindow);
     onEscKeydownHandler(main, errorMessageWindow);
+
+    resetButton.addEventListener('click', function(){
+      resetPage();
+    });
+
+    console.log(resetButton);
 
   })();
 
