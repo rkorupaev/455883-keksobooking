@@ -426,11 +426,13 @@
 
   function resetPage() {
     var map = document.querySelector('.map');
+    var form = document.querySelector('.ad-form');
     var announcementsFilterForm = document.querySelector('.ad-form');
     var fieldsetList = announcementsFilterForm.getElementsByTagName('fieldset');
     var addressInput = document.getElementById('address');
     addressInput.value = INITIAL_POSITION_MAIN_PIN_X + (MAIN_PIN_WIDTH / 2) + ' , ' + (INITIAL_POSITION_MAIN_PIN_Y + 85);
     map.classList.add('map--faded');
+    form.classList.add('ad-form--disabled');
     var mapElementsToDelete = map.querySelectorAll('.map__pin');
     var pinContiner = map.querySelector('.map__pins');
     for (var i = 1; i < mapElementsToDelete.length; i++) {
