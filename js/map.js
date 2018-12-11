@@ -2,6 +2,8 @@
   var MAIN_PIN_WIDTH = 65;
   var INITIAL_POSITION_MAIN_PIN_X = 570;
   var INITIAL_POSITION_MAIN_PIN_Y = 375;
+  var PIN_SHIFT_X = 32;
+  var PIN_SHIFT_Y = 87;
 
   function activatePage() {
     var pinMain = document.querySelector('.map__pin--main');
@@ -23,11 +25,6 @@
       var onMouseMove = function(moveEvt) {
         moveEvt.preventDefault();
 
-        console.log(parseInt(pinMain.style.top));
-        var tempo = parseInt(pinMain.style.top);
-
-
-
         var shift = {
           x: initialLocationX - moveEvt.clientX,
           y: initialLocationY - moveEvt.clientY
@@ -40,7 +37,7 @@
         pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
 
 
-        setAddressCoordinates(parseInt(pinMain.style.left) + 32, parseInt(pinMain.style.top) + 87, addressInput);
+        setAddressCoordinates(parseInt(pinMain.style.left) + PIN_SHIFT_X, parseInt(pinMain.style.top) + PIN_SHIFT_Y, addressInput);
       };
 
 
@@ -85,18 +82,17 @@
     window.load(function(announcementsInfoLoaded) {
       var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
       var pins = [];
-      console.log(announcementsInfoLoaded);
       for (var i = 0; i < announcementsInfoLoaded.length; i++) {
-        pins[i] = pinTemplate.cloneNode(true);
-        pins[i].style = 'left: ' + announcementsInfoLoaded[i].location.x + 'px; top: ' + announcementsInfoLoaded[i].location.y + 'px;';
-        pins[i].querySelector('img').src = announcementsInfoLoaded[i].author.avatar;
-        pins[i].querySelector('img').alt = announcementsInfoLoaded[i].offer.title;
+        var pin = pinTemplate.cloneNode(true);
+        pin.style = 'left: ' + announcementsInfoLoaded[i].location.x + 'px; top: ' + announcementsInfoLoaded[i].location.y + 'px;';
+        pin.querySelector('img').src = announcementsInfoLoaded[i].author.avatar;
+        pin.querySelector('img').alt = announcementsInfoLoaded[i].offer.title;
+        pins.push(pin);
 
         onPinButtonClickHandler(pins, i, announcementsInfoLoaded);
         onPinButtonKeydownHandler(pins, i, announcementsInfoLoaded);
       }
       placePins(pins);
-      console.log(pins);
     });
   }
 
@@ -148,10 +144,6 @@
     var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
     var card = cardTemplate.cloneNode(true);
-    console.log(card);
-    console.log(iteration);
-    console.log(announcementsInfo[iteration]);
-
     card.querySelector('.popup__title').textContent = announcementsInfo[iteration].offer.title;
     card.querySelector('.popup__text--address').textContent = announcementsInfo[iteration].offer.adress;
     card.querySelector('.popup__text--price').textContent = announcementsInfo[iteration].offer.price + '₽/ночь';
@@ -195,7 +187,7 @@
     var cardList = document.querySelector('.map');
     cardList.insertBefore(card, mapFilterContainer);
 
-    var avatarImagerSrc = document.querySelector('.popup__avatar').src = announcementsInfo[iteration].author.avatar;
+    card.querySelector('.popup__avatar').src = announcementsInfo[iteration].author.avatar;
 
 
     function makePhotoBlock(array) {
