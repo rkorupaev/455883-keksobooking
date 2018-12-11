@@ -280,21 +280,6 @@
     });
   }
 
-  // function setMaxMinPriceErrorMessage(node, message, price, validity) {
-  //   node.addEventListener('input', function() {
-  //     if (node.value >= 1000000) {
-  //       node.setCustomValidity(message);
-  //       validity = false;
-  //     } else if (node.value <= price) {
-  //       node.setCustomValidity(message);
-  //       validity = false;
-  //     } else {
-  //       node.setCustomValidity('');
-  //       validity = true;
-  //     }
-  //   });
-  // }
-
   function editForm() {
     var form = document.querySelector('.ad-form');
     var titleInput = form.querySelector('#title');
@@ -329,7 +314,6 @@
           price.placeholder = '10000';
           break;
       }
-      console.log(minPrice);
     });
 
     price.addEventListener('input', function() {
@@ -355,7 +339,7 @@
 
     for (var i = 0; i < roomsNumber.length; i++) {
       if (roomsNumber.selectedIndex === i) {
-        capacity.selectedIndex = setInitialRoomAndGuestNumber(roomsSelectedIndex, capacitySelectedIndex);
+        capacity.selectedIndex = roomsSelectedIndex === 3 ? 3 : 2;
         capacity[0].disabled = true;
         capacity[1].disabled = true;
         capacity[3].disabled = true;
@@ -373,10 +357,12 @@
         case 1:
           capacity[0].disabled = true;
           capacity[1].disabled = false;
+          capacity[2].disabled = false;
           capacity[3].disabled = true;
           break;
         case 2:
           capacity[0].disabled = false;
+          capacity[2].disabled = false;
           capacity[1].disabled = false;
           capacity[3].disabled = true;
           break;
@@ -386,7 +372,6 @@
           capacity[2].disabled = true;
           capacity[3].disabled = false;
           break;
-
       }
     });
   }
@@ -402,27 +387,6 @@
     });
   }
 
-  function setInitialRoomAndGuestNumber(roomList, capacityList) {
-    var index = capacityList;
-    switch (roomList) {
-      case 0:
-        index = 2;
-        break;
-      case 1:
-        index = 2;
-        break;
-      case 2:
-        index = 2;
-        break;
-      case 3:
-        index = 3;
-        break;
-    }
-    return index;
-  }
-
-
-
   (function submitFrom() {
     var form = document.querySelector('.ad-form');
     var submitButton = form.querySelector('.ad-form__submit');
@@ -433,7 +397,7 @@
     var errorMessageWindow = errorMessageWindowTemplate.cloneNode(true);
     var resetButton = form.querySelector('.ad-form__reset');
 
-    submitButton.addEventListener('click', function(evt) {
+    form.addEventListener('submit', function(evt) {
       evt.preventDefault();
       if (form.reportValidity() === true) {
         main.appendChild(succesMessageWindow);
