@@ -89,8 +89,8 @@
         pin.querySelector('img').alt = announcementsInfoLoaded[i].offer.title;
         pins.push(pin);
 
-        onPinButtonClickHandler(pins, i, announcementsInfoLoaded);
-        onPinButtonKeydownHandler(pins, i, announcementsInfoLoaded);
+        onPinButtonClickHandler(pin, announcementsInfoLoaded[i]);
+        onPinButtonKeydownHandler(announcementsInfoLoaded[i]);
       }
       placePins(pins);
     });
@@ -109,68 +109,69 @@
 
 
 
-  function onPinButtonClickHandler(pinsArray, iteration, announcementsInfo) {
-    pinsArray[iteration].addEventListener('click', function() {
+  function onPinButtonClickHandler(pin, announcementInfo) {
+    pin.addEventListener('click', function() {
       var tempoDom = document.querySelector('.map').querySelector('.popup');
       if (tempoDom === null) {
-        showCard(announcementsInfo, iteration);
+        console.log(announcementInfo);
+        showCard(announcementInfo);
         var tempoDom = document.querySelector('.map').querySelector('.popup');
       } else {
         var articleDom = document.querySelector('.map').querySelector('.popup');
         onCardCloseHandler(articleDom);
-        showCard(announcementsInfo, iteration);
+        showCard(announcementInfo);
       }
     });
   }
 
-  function onPinButtonKeydownHandler(pinsArray, iteration, announcementsInfo) {
+  function onPinButtonKeydownHandler(announcementInfo) {
     document.addEventListener('keydown', function(evt) {
       var tempoDom = document.querySelector('.map').querySelector('.popup');
       if (evt.keyCode === 13) {
         if (tempoDom === null) {
-          showCard(iteration);
+          showCard(announcementInfo);
           var tempoDom = document.querySelector('.map').querySelector('.popup');
         } else {
           var articleDom = document.querySelector('.map').querySelector('.popup');
           onCardCloseHandler(articleDom);
-          showCard(iteration);
+          showCard(announcementInfo);
         }
       }
     });
   }
 
 
-  function showCard(announcementsInfo, iteration) {
+  function showCard(info) {
     var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
     var card = cardTemplate.cloneNode(true);
-    card.querySelector('.popup__title').textContent = announcementsInfo[iteration].offer.title;
-    card.querySelector('.popup__text--address').textContent = announcementsInfo[iteration].offer.adress;
-    card.querySelector('.popup__text--price').textContent = announcementsInfo[iteration].offer.price + '₽/ночь';
-    card.querySelector('.popup__type').textContent = convertToFullName(announcementsInfo[iteration].offer.type);
-    card.querySelector('.popup__text--capacity').textContent = announcementsInfo[iteration].offer.rooms + ' комнаты для ' + announcementsInfo[iteration].offer.guests + ' гостей.';
-    card.querySelector('.popup__text--time').textContent = 'Заезд после ' + announcementsInfo[iteration].offer.checkin + ', выезд до ' + announcementsInfo[iteration].offer.checkout;
-    card.querySelector('.popup__description').textContent = announcementsInfo[iteration].offer.description;
-    for (var i = 0; i < announcementsInfo[iteration].offer.features.length; i++) {
-      card.querySelector('.popup__feature--wifi').textContent = announcementsInfo[iteration].offer.features[i];
-      switch (announcementsInfo[iteration].offer.features[i]) {
+    card.querySelector('.popup__title').textContent = info.offer.title;
+    card.querySelector('.popup__text--address').textContent = info.offer.adress;
+    card.querySelector('.popup__text--price').textContent = info.offer.price + '₽/ночь';
+    card.querySelector('.popup__type').textContent = convertToFullName(info.offer.type);
+    card.querySelector('.popup__text--capacity').textContent = info.offer.rooms + ' комнаты для ' + info.offer.guests + ' гостей.';
+    card.querySelector('.popup__text--time').textContent = 'Заезд после ' + info.offer.checkin + ', выезд до ' + info.offer.checkout;
+    card.querySelector('.popup__description').textContent = info.offer.description;
+    for (var i = 0; i < info.offer.features.length; i++) {
+      card.querySelector('.popup__feature--wifi').textContent = info.offer.features[i];
+      switch (info.offer.features[i]) {
         case 'wifi':
-          card.querySelector('.popup__feature--wifi').textContent = announcementsInfo[iteration].offer.features[i];
+          card.querySelector('.popup__feature--wifi').textContent = info.offer.features[i];
           break;
         case 'dishwasher':
-          card.querySelector('.popup__feature--dishwasher').textContent = announcementsInfo[iteration].offer.features[i];
+          card.querySelector('.popup__feature--dishwasher').textContent = info.offer.features[i];
           break;
         case 'parking':
-          card.querySelector('.popup__feature--parking').textContent = announcementsInfo[iteration].offer.features[i];
+          card.querySelector('.popup__feature--parking').textContent = info.offer.features[i];
           break;
         case 'washer':
-          card.querySelector('.popup__feature--washer').textContent = announcementsInfo[iteration].offer.features[i];
+          card.querySelector('.popup__feature--washer').textContent = info.offer.features[i];
           break;
         case 'elevator':
-          card.querySelector('.popup__feature--elevator').textContent = announcementsInfo[iteration].offer.features[i];
+          card.querySelector('.popup__feature--elevator').textContent = info.offer.features[i];
           break;
         case 'conditioner':
-          card.querySelector('.popup__feature--conditioner').textContent = announcementsInfo[iteration].offer.features[i];
+          card.querySelector('.popup__feature--conditioner').textContent = info.offer.features[i];
           break;
       }
     }
@@ -187,7 +188,7 @@
     var cardList = document.querySelector('.map');
     cardList.insertBefore(card, mapFilterContainer);
 
-    card.querySelector('.popup__avatar').src = announcementsInfo[iteration].author.avatar;
+    card.querySelector('.popup__avatar').src = info.author.avatar;
 
 
     function makePhotoBlock(array) {
@@ -203,13 +204,13 @@
       photoBlock.appendChild(fragment);
     }
 
-    makePhotoBlock(announcementsInfo[0].offer.photos);
+    makePhotoBlock(info.offer.photos);
 
 
     var element = document.querySelectorAll('.popup__photo');
 
-    for (var i = 0; i < announcementsInfo[0].offer.photos.length; i++) {
-      element[i].src = announcementsInfo[0].offer.photos[i];
+    for (var i = 0; i < info.offer.photos.length; i++) {
+      element[i].src = info.offer.photos[i];
     }
 
     var map = document.querySelector('.map');
