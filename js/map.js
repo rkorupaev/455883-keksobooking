@@ -4,6 +4,8 @@
   var INITIAL_POSITION_MAIN_PIN_Y = 375;
   var PIN_SHIFT_X = 32;
   var PIN_SHIFT_Y = 87;
+  var ESC_KEY_CODE = 27;
+  var ENTER_KEY_CODE = 13;
 
 
   function activatePage() {
@@ -114,7 +116,6 @@
     pin.addEventListener('click', function() {
       var tempoDom = document.querySelector('.map').querySelector('.popup');
       if (tempoDom === null) {
-        console.log(announcementInfo);
         showCard(announcementInfo);
         var tempoDom = document.querySelector('.map').querySelector('.popup');
       } else {
@@ -128,7 +129,7 @@
   function onPinButtonKeydownHandler(announcementInfo) {
     document.addEventListener('keydown', function(evt) {
       var tempoDom = document.querySelector('.map').querySelector('.popup');
-      if (evt.keyCode === 13) {
+      if (evt.keyCode === ENTER_KEY_CODE) {
         if (tempoDom === null) {
           showCard(announcementInfo);
           var tempoDom = document.querySelector('.map').querySelector('.popup');
@@ -234,7 +235,7 @@
     var closeButton = document.querySelector('.popup__close');
 
     onCardCloseButtonClickHandler(closeButton, map, articleDom);
-    onEscKeydownHandler(map, articleDom);
+    onEscKeydownHandler(articleDom);
   }
 
   function onCardCloseButtonClickHandler(button, container, element) {
@@ -243,14 +244,11 @@
     });
   }
 
-  function onEscKeydownHandler(container, element) {
+  function onEscKeydownHandler(element) {
     document.addEventListener('keydown', function(evt) {
-      console.dir(evt);
       var target = evt.target;
-      console.dir(target);
-      if (evt.keyCode === 27) {
-        element.parentNode.removeChild(element);
-        /тут ошибка вылезает. но работает/
+      if (evt.keyCode === ESC_KEY_CODE) {
+        element.remove();
       }
     });
   }
@@ -436,8 +434,8 @@
     errorMessageWindow.addEventListener('click', function() {
       errorMessageWindow.parentNode.removeChild(errorMessageWindow);
     });
-    onEscKeydownHandler(main, succesMessageWindow);
-    onEscKeydownHandler(main, errorMessageWindow);
+    onEscKeydownHandler(succesMessageWindow);
+    onEscKeydownHandler(errorMessageWindow);
 
     resetButton.addEventListener('click', function() {
       resetPage();
