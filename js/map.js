@@ -150,45 +150,10 @@ function showCard(info) {
   card.querySelector('.popup__text--time').textContent = 'Заезд после ' + info.offer.checkin + ', выезд до ' + info.offer.checkout;
   card.querySelector('.popup__description').textContent = info.offer.description;
   for (var i = 0; i < info.offer.features.length; i++) {
-    card.querySelector('.popup__feature--wifi').textContent = info.offer.features[i];
-    switch (info.offer.features[i]) {
-      case 'wifi':
-        card.querySelector('.popup__feature--wifi').textContent = info.offer.features[i];
-        break;
-      case 'dishwasher':
-        card.querySelector('.popup__feature--dishwasher').textContent = info.offer.features[i];
-        break;
-      case 'parking':
-        card.querySelector('.popup__feature--parking').textContent = info.offer.features[i];
-        break;
-      case 'washer':
-        card.querySelector('.popup__feature--washer').textContent = info.offer.features[i];
-        break;
-      case 'elevator':
-        card.querySelector('.popup__feature--elevator').textContent = info.offer.features[i];
-        break;
-      case 'conditioner':
-        card.querySelector('.popup__feature--conditioner').textContent = info.offer.features[i];
-        break;
-    }
+    card.querySelector('.popup__feature--' + info.offer.features[i]).textContent = info.offer.features[i];
   }
 
-  // var parentNodeOfLi = card.querySelector('.popup__features');
   var featuresNodesArray = card.querySelectorAll('.popup__feature');
-  // debugger;
-  // for (var i = 0; i < featuresNodesArray.length; i++) {
-  //   for (var j = 0; j < info.offer.features.length; j++){
-  //     var tempoVar = 'popup__feature--'+ info.offer.features[j];
-  //     console.log(tempoVar);
-  //     console.log(parentNodeOfLi);
-  //     if (featuresNodesArray[j].classList.contains(tempoVar) === true) {
-  //       return;
-  //     } else {
-  //       featuresNodesArray[i].parentNode.removeChild(featuresNodesArray[i]);
-  //       break;
-  //     }
-  //   }
-  // }
 
   for (var i = 0; i < featuresNodesArray.length; i++) {
     if (featuresNodesArray[i].textContent.length === 0) {
