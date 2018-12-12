@@ -40,7 +40,7 @@ function activatePage() {
       pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
 
 
-      setAddressCoordinates(parseInt(pinMain.style.left) + PIN_SHIFT_X, parseInt(pinMain.style.top) + PIN_SHIFT_Y, addressInput);
+      setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X, parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
     };
 
 
@@ -155,9 +155,9 @@ function showCard(info) {
 
   var featuresNodesArray = card.querySelectorAll('.popup__feature');
 
-  for (var i = 0; i < featuresNodesArray.length; i++) {
-    if (featuresNodesArray[i].textContent.length === 0) {
-      featuresNodesArray[i].parentNode.removeChild(featuresNodesArray[i]);
+  for (var j = 0; j < featuresNodesArray.length; j++) {
+    if (featuresNodesArray[j].textContent.length === 0) {
+      featuresNodesArray[j].parentNode.removeChild(featuresNodesArray[j]);
     }
   }
 
@@ -168,27 +168,13 @@ function showCard(info) {
   card.querySelector('.popup__avatar').src = info.author.avatar;
 
 
-  function makePhotoBlock(array) {
-    var photos = [];
-    var imgTag = document.querySelector('.popup__photos').querySelector('img');
-    var photoBlock = document.querySelector('.popup__photos');
-    var fragment = document.createDocumentFragment();
-    imgTag.remove();
-    for (var i = 0; i < array.length; i++) {
-      photos[i] = imgTag.cloneNode(true);
-
-      fragment.appendChild(photos[i]);
-    }
-    photoBlock.appendChild(fragment);
-  }
-
   makePhotoBlock(info.offer.photos);
 
 
   var element = document.querySelectorAll('.popup__photo');
 
-  for (var i = 0; i < info.offer.photos.length; i++) {
-    element[i].src = info.offer.photos[i];
+  for (var b = 0; b < info.offer.photos.length; b++) {
+    element[b].src = info.offer.photos[b];
   }
 
   var map = document.querySelector('.map');
@@ -211,6 +197,20 @@ function onEscKeydownHandler(element) {
       element.remove();
     }
   });
+}
+
+function makePhotoBlock(array) {
+  var photos = [];
+  var imgTag = document.querySelector('.popup__photos').querySelector('img');
+  var photoBlock = document.querySelector('.popup__photos');
+  var fragment = document.createDocumentFragment();
+  imgTag.remove();
+  for (var i = 0; i < array.length; i++) {
+    photos[i] = imgTag.cloneNode(true);
+
+    fragment.appendChild(photos[i]);
+  }
+  photoBlock.appendChild(fragment);
 }
 
 function onCardCloseHandler(element) {
