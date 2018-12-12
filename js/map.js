@@ -208,7 +208,8 @@ function showCard(info) {
     var imgTag = document.querySelector('.popup__photos').querySelector('img');
     var photoBlock = document.querySelector('.popup__photos');
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < array.length - 1; i++) {
+    imgTag.remove();
+    for (var i = 0; i < array.length; i++) {
       photos[i] = imgTag.cloneNode(true);
 
       fragment.appendChild(photos[i]);
