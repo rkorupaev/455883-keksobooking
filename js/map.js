@@ -5,6 +5,7 @@
   var PIN_SHIFT_X = 32;
   var PIN_SHIFT_Y = 87;
 
+
   function activatePage() {
     var pinMain = document.querySelector('.map__pin--main');
     var map = document.querySelector('.map');
@@ -176,7 +177,22 @@
       }
     }
 
+    // var parentNodeOfLi = card.querySelector('.popup__features');
     var featuresNodesArray = card.querySelectorAll('.popup__feature');
+    // debugger;
+    // for (var i = 0; i < featuresNodesArray.length; i++) {
+    //   for (var j = 0; j < info.offer.features.length; j++){
+    //     var tempoVar = 'popup__feature--'+ info.offer.features[j];
+    //     console.log(tempoVar);
+    //     console.log(parentNodeOfLi);
+    //     if (featuresNodesArray[j].classList.contains(tempoVar) === true) {
+    //       return;
+    //     } else {
+    //       featuresNodesArray[i].parentNode.removeChild(featuresNodesArray[i]);
+    //       break;
+    //     }
+    //   }
+    // }
 
     for (var i = 0; i < featuresNodesArray.length; i++) {
       if (featuresNodesArray[i].textContent.length === 0) {
@@ -403,7 +419,11 @@
       if (form.reportValidity() === true) {
         main.appendChild(succesMessageWindow);
         resetPage();
-      } else {
+      }
+    });
+
+    submitButton.addEventListener('click', function() {
+      if (form.reportValidity() === false) {
         main.appendChild(errorMessageWindow);
         errorMessageWindow.querySelector('.error__button').autofocus = true;
       }
