@@ -18,8 +18,6 @@
   addressInput.value = INITIAL_POSITION_MAIN_PIN_X + ' , ' + INITIAL_POSITION_MAIN_PIN_Y;
   addressInput.readOnly = true;
 
-
-
   window.util.disableElements(fieldsetList);
 
   pinMain.addEventListener('mousedown', function(evt) {
@@ -27,7 +25,6 @@
 
     var initialLocationX = evt.clientX;
     var initialLocationY = evt.clientY;
-
 
     var onMouseMove = function(moveEvt) {
       moveEvt.preventDefault();
@@ -53,11 +50,10 @@
         pinMain.style.left = '0px';
       }
 
-
-      window.util.setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X, parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
+      window.util.setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X,
+        parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
 
     };
-
 
     var onMouseUp = function(upEvt) {
       upEvt.preventDefault();
@@ -66,7 +62,6 @@
       announcementsFilterForm.classList.remove('ad-form--disabled');
       window.util.enableElements(fieldsetList);
       window.util.createPins();
-
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);

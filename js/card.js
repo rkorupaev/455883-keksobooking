@@ -2,7 +2,7 @@
 
 (function () {
 
-  function showCard(info) {
+  function show(info) {
     var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
     var card = cardTemplate.cloneNode(true);
@@ -82,7 +82,7 @@
     return fullName;
   }
 
-  window.showcard = {
-    showCard: showCard
+  window.card = {
+    show: show
   };
 })();

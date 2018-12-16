@@ -53,11 +53,11 @@
     pin.addEventListener('click', function () {
       var tempoDom = document.querySelector('.map').querySelector('.popup');
       if (tempoDom === null) {
-        window.showcard.showCard(announcementInfo);
+        window.card.show(announcementInfo);
       } else {
         var articleDom = document.querySelector('.map').querySelector('.popup');
         onCardCloseHandler(articleDom);
-        window.showcard.showCard(announcementInfo);
+        window.card.show(announcementInfo);
       }
     });
   }
@@ -67,11 +67,11 @@
       var tempoDom = document.querySelector('.map').querySelector('.popup');
       if (evt.keyCode === ENTER_KEY_CODE) {
         if (tempoDom === null) {
-          window.showcard.showCard(announcementInfo);
+          window.card.show(announcementInfo);
         } else {
           var articleDom = document.querySelector('.map').querySelector('.popup');
           onCardCloseHandler(articleDom);
-          window.showcard.showCard(announcementInfo);
+          window.card.show(announcementInfo);
         }
       }
     });
