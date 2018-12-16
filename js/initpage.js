@@ -7,8 +7,6 @@
   var INITIAL_POSITION_MAIN_PIN_Y = 375;
   var PIN_SHIFT_X = 32;
   var PIN_SHIFT_Y = 87;
-  var ESC_KEY_CODE = 27;
-  var ENTER_KEY_CODE = 13;
   var MAX_Y_COORDINATE = 630;
   var MIN_Y_COORDINATE = 130;
 
@@ -67,7 +65,7 @@
       map.classList.remove('map--faded');
       announcementsFilterForm.classList.remove('ad-form--disabled');
       window.util.enableElements(fieldsetList);
-      createPins();
+      window.util.createPins();
 
 
       document.removeEventListener('mousemove', onMouseMove);
