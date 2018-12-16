@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
 
   var ESC_KEY_CODE = 27;
   var ENTER_KEY_CODE = 13;
@@ -32,7 +32,7 @@
   }
 
   function createPins() {
-    window.load(function(announcementsInfoLoaded) {
+    window.load(function (announcementsInfoLoaded) {
       var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
       var pins = [];
       for (var i = 0; i < announcementsInfoLoaded.length; i++) {
@@ -50,7 +50,7 @@
   }
 
   function onPinButtonClickHandler(pin, announcementInfo) {
-    pin.addEventListener('click', function() {
+    pin.addEventListener('click', function () {
       var tempoDom = document.querySelector('.map').querySelector('.popup');
       if (tempoDom === null) {
         window.showcard.showCard(announcementInfo);
@@ -63,7 +63,7 @@
   }
 
   function onPinButtonKeydownHandler(announcementInfo) {
-    document.addEventListener('keydown', function(evt) {
+    document.addEventListener('keydown', function (evt) {
       var tempoDom = document.querySelector('.map').querySelector('.popup');
       if (evt.keyCode === ENTER_KEY_CODE) {
         if (tempoDom === null) {
@@ -78,13 +78,13 @@
   }
 
   function onCardCloseButtonClickHandler(button, container, element) {
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
       container.removeChild(element);
     });
   }
 
   function onEscKeydownHandler(element) {
-    document.addEventListener('keydown', function(evt) {
+    document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ESC_KEY_CODE) {
         element.remove();
       }
@@ -96,7 +96,7 @@
   }
 
   function setMaxMinLengthErrorMessage(node, maxMessage, minMessage) {
-    node.addEventListener('input', function() {
+    node.addEventListener('input', function () {
       if (node.value.length >= 100) {
         node.setCustomValidity(maxMessage);
 
@@ -117,8 +117,7 @@
     createPins: createPins,
     onEscKeydownHandler: onEscKeydownHandler,
     onCardCloseButtonClickHandler: onCardCloseButtonClickHandler,
-    onEscKeydownHandler: onEscKeydownHandler,
     setMaxMinLengthErrorMessage: setMaxMinLengthErrorMessage
-  }
+  };
 
 })();

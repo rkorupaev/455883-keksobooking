@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
 
   function showCard(info) {
     var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
@@ -84,5 +84,5 @@
 
   window.showcard = {
     showCard: showCard
-  }
+  };
 })();

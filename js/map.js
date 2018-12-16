@@ -14,7 +14,7 @@ function editForm() {
   var price = form.querySelector('#price');
   price.placeholder = '1000';
 
-  type.addEventListener('change', function() {
+  type.addEventListener('change', function () {
     var typeIndex = form.querySelector('#type').selectedIndex;
     switch (typeIndex) {
       case 0:
@@ -36,7 +36,7 @@ function editForm() {
     }
   });
 
-  price.addEventListener('input', function() {
+  price.addEventListener('input', function () {
     if (price.value >= 1000000 || price.value <= minPrice) {
       price.setCustomValidity('Цена за ночь должна быть от ' + minPrice + ' до 1000000.');
     } else {
@@ -64,7 +64,7 @@ function editForm() {
     }
   }
 
-  roomsNumber.addEventListener('change', function() {
+  roomsNumber.addEventListener('change', function () {
     switch (roomsNumber.selectedIndex) {
       case 0:
         capacity[0].disabled = true;
@@ -98,7 +98,7 @@ function editForm() {
 editForm();
 
 function onSelectTimeInOutChangeHandler(changedNode, changableNode) {
-  changedNode.addEventListener('change', function() {
+  changedNode.addEventListener('change', function () {
     var index;
     index = changedNode.selectedIndex;
     changableNode.selectedIndex = index;
@@ -115,7 +115,7 @@ function onSelectTimeInOutChangeHandler(changedNode, changableNode) {
   var errorMessageWindow = errorMessageWindowTemplate.cloneNode(true);
   var resetButton = form.querySelector('.ad-form__reset');
 
-  form.addEventListener('submit', function(evt) {
+  form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     if (form.reportValidity() === true) {
       main.appendChild(succesMessageWindow);
@@ -123,24 +123,24 @@ function onSelectTimeInOutChangeHandler(changedNode, changableNode) {
     }
   });
 
-  submitButton.addEventListener('click', function() {
+  submitButton.addEventListener('click', function () {
     if (form.reportValidity() === false) {
       main.appendChild(errorMessageWindow);
       errorMessageWindow.querySelector('.error__button').autofocus = true;
     }
   });
 
-  succesMessageWindow.addEventListener('click', function() {
+  succesMessageWindow.addEventListener('click', function () {
     succesMessageWindow.parentNode.removeChild(succesMessageWindow);
   });
 
-  errorMessageWindow.addEventListener('click', function() {
+  errorMessageWindow.addEventListener('click', function () {
     errorMessageWindow.parentNode.removeChild(errorMessageWindow);
   });
   window.util.onEscKeydownHandler(succesMessageWindow);
   window.util.onEscKeydownHandler(errorMessageWindow);
 
-  resetButton.addEventListener('click', function() {
+  resetButton.addEventListener('click', function () {
     resetPage();
   });
 })();
@@ -168,17 +168,17 @@ function resetPage() {
 (function filterAnnouncements() {
   var typeFilter = document.getElementById('housing-type');
   var typeFilterOptionList = typeFilter.querySelectorAll('option');
-  window.load(function(announcementsInfoLoaded) {
-    typeFilter.addEventListener('change', function() {
+  window.load(function (announcementsInfoLoaded) {
+    typeFilter.addEventListener('change', function () {
       createDataArray(announcementsInfoLoaded, typeFilterOptionList[typeFilter.selectedIndex].value);
     });
   });
 })();
 
 
-function createDataArray( infoArray, type) {
+function createDataArray(infoArray, type) {
   var similarAnnouncement = [];
-  similarAnnouncement = infoArray.filter(function(announcement) {
+  similarAnnouncement = infoArray.filter(function (announcement) {
     return announcement.offer.type === type;
   });
 }
