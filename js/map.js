@@ -51,9 +51,9 @@ function activatePage() {
       pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
 
       if (pinMain.offsetTop >= MAX_Y_COORDINATE) {
-        pinMain.style.top = '630px';
+        pinMain.style.top = MAX_Y_COORDINATE +'px';
       } else if (pinMain.offsetTop <= MIN_Y_COORDINATE) {
-        pinMain.style.top = '130px';
+        pinMain.style.top = MIN_Y_COORDINATE + 'px';
       } else if (pinMain.offsetLeft + MAIN_PIN_WIDTH >= map.clientWidth) {
         pinMain.style.left = map.clientWidth - MAIN_PIN_WIDTH + 'px';
       } else if (pinMain.offsetLeft  <= 0) {
