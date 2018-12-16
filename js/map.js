@@ -6,6 +6,8 @@ var PIN_SHIFT_X = 32;
 var PIN_SHIFT_Y = 87;
 var ESC_KEY_CODE = 27;
 var ENTER_KEY_CODE = 13;
+var MAX_Y_COORDINATE = 630;
+var MIN_Y_COORDINATE = 130;
 
 
 function activatePage() {
@@ -25,8 +27,12 @@ function activatePage() {
     var initialLocationX = evt.clientX;
     var initialLocationY = evt.clientY;
 
+
+
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
+
+    if (initialLocationY <= MAX_Y_COORDINATE - PIN_SHIFT_Y && initialLocationY >= MIN_Y_COORDINATE) {
 
       var shift = {
         x: initialLocationX - moveEvt.clientX,
@@ -38,10 +44,14 @@ function activatePage() {
 
       pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
       pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
+    }
 
 
       setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X, parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
+
     };
+
+
 
 
     var onMouseUp = function (upEvt) {
@@ -414,3 +424,48 @@ function resetPage() {
   form.reset();
   disableElements(fieldsetList);
 }
+
+
+
+
+// (function filterAnnouncements() {
+//   var typeFilter = document.getElementById('housing-type');
+//   var typeFilterOptionList = typeFilter.querySelectorAll('option');
+//   var similarAnnouncement = [];
+//   console.log(typeFilter);
+//   console.log(typeFilterOptionList);
+//   window.load(function(announcementsInfoLoaded) {
+//     console.log(announcementsInfoLoaded[2].offer.type);
+//     typeFilter.addEventListener('change', function() {
+//       debugger;
+//       switch (typeFilterOptionList[typeFilter.selectedIndex].value) {
+//         case 'flat':
+//           similarAnnouncement = announcementsInfoLoaded.filter(function(announcement) {
+//             return announcement.offer.type === 'flat';
+//           });
+//         case 'palace':
+//           similarAnnouncement = announcementsInfoLoaded.filter(function(announcement) {
+//             return announcement.offer.type === 'palace';
+//           });
+//         case 'house':
+//           similarAnnouncement = announcementsInfoLoaded.filter(function(announcement) {
+//             return announcement.offer.type === 'house';
+//           });
+//         case 'bungalo':
+//           similarAnnouncement = announcementsInfoLoaded.filter(function(announcement) {
+//             return announcement.offer.type === 'bungalo';
+//           });
+//         // case 'any':
+//         //   similarAnnouncement = announcementsInfoLoaded;
+
+
+//       }
+//       console.log(typeFilterOptionList[typeFilter.selectedIndex].value);
+//       console.log(similarAnnouncement);
+
+
+//     });
+//   });
+
+
+// })();
