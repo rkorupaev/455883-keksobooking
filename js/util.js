@@ -99,13 +99,10 @@
     node.addEventListener('input', function () {
       if (node.value.length >= 100) {
         node.setCustomValidity(maxMessage);
-
       } else if (node.value.length <= 30) {
         node.setCustomValidity(minMessage);
-
       } else {
         node.setCustomValidity('');
-
       }
     });
   }
@@ -119,5 +116,4 @@
     onCardCloseButtonClickHandler: onCardCloseButtonClickHandler,
     setMaxMinLengthErrorMessage: setMaxMinLengthErrorMessage
   };
-
 })();
