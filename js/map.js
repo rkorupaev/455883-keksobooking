@@ -21,7 +21,10 @@ function activatePage() {
 
   disableElements(fieldsetList);
 
-  pinMain.addEventListener('mousedown', function (evt) {
+  console.dir(map);
+  console.dir(pinMain);
+
+  pinMain.addEventListener('mousedown', function(evt) {
     evt.preventDefault();
 
     var initialLocationX = evt.clientX;
@@ -29,10 +32,12 @@ function activatePage() {
 
 
 
-    var onMouseMove = function (moveEvt) {
+    var onMouseMove = function(moveEvt) {
       moveEvt.preventDefault();
+      console.log(pinMain.offsetLeft);
 
-    if (initialLocationY <= MAX_Y_COORDINATE - PIN_SHIFT_Y && initialLocationY >= MIN_Y_COORDINATE) {
+
+
 
       var shift = {
         x: initialLocationX - moveEvt.clientX,
@@ -44,7 +49,16 @@ function activatePage() {
 
       pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
       pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
-    }
+
+      if (pinMain.offsetTop >= MAX_Y_COORDINATE) {
+        pinMain.style.top = '630px';
+      } else if (pinMain.offsetTop <= MIN_Y_COORDINATE) {
+        pinMain.style.top = '130px';
+      } else if (pinMain.offsetLeft + MAIN_PIN_WIDTH >= map.clientWidth) {
+        pinMain.style.left = map.clientWidth - MAIN_PIN_WIDTH + 'px';
+      } else if (pinMain.offsetLeft  <= 0) {
+        pinMain.style.left = '0px';
+      }
 
 
       setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X, parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
@@ -54,7 +68,7 @@ function activatePage() {
 
 
 
-    var onMouseUp = function (upEvt) {
+    var onMouseUp = function(upEvt) {
       upEvt.preventDefault();
 
       map.classList.remove('map--faded');
@@ -91,7 +105,7 @@ function setAddressCoordinates(coordinateX, coordinateY, input) {
 }
 
 function createPins() {
-  window.load(function (announcementsInfoLoaded) {
+  window.load(function(announcementsInfoLoaded) {
     var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
     var pins = [];
     for (var i = 0; i < announcementsInfoLoaded.length; i++) {
@@ -120,7 +134,7 @@ function placePins(pinsArray) {
 
 
 function onPinButtonClickHandler(pin, announcementInfo) {
-  pin.addEventListener('click', function () {
+  pin.addEventListener('click', function() {
     var tempoDom = document.querySelector('.map').querySelector('.popup');
     if (tempoDom === null) {
       showCard(announcementInfo);
@@ -133,7 +147,7 @@ function onPinButtonClickHandler(pin, announcementInfo) {
 }
 
 function onPinButtonKeydownHandler(announcementInfo) {
-  document.addEventListener('keydown', function (evt) {
+  document.addEventListener('keydown', function(evt) {
     var tempoDom = document.querySelector('.map').querySelector('.popup');
     if (evt.keyCode === ENTER_KEY_CODE) {
       if (tempoDom === null) {
@@ -196,13 +210,13 @@ function showCard(info) {
 }
 
 function onCardCloseButtonClickHandler(button, container, element) {
-  button.addEventListener('click', function () {
+  button.addEventListener('click', function() {
     container.removeChild(element);
   });
 }
 
 function onEscKeydownHandler(element) {
-  document.addEventListener('keydown', function (evt) {
+  document.addEventListener('keydown', function(evt) {
     if (evt.keyCode === ESC_KEY_CODE) {
       element.remove();
     }
@@ -247,7 +261,7 @@ function convertToFullName(name) {
 }
 
 function setMaxMinLengthErrorMessage(node, maxMessage, minMessage) {
-  node.addEventListener('input', function () {
+  node.addEventListener('input', function() {
     if (node.value.length >= 100) {
       node.setCustomValidity(maxMessage);
 
@@ -275,7 +289,7 @@ function editForm() {
   var price = form.querySelector('#price');
   price.placeholder = '1000';
 
-  type.addEventListener('change', function () {
+  type.addEventListener('change', function() {
     var typeIndex = form.querySelector('#type').selectedIndex;
     switch (typeIndex) {
       case 0:
@@ -297,7 +311,7 @@ function editForm() {
     }
   });
 
-  price.addEventListener('input', function () {
+  price.addEventListener('input', function() {
     if (price.value >= 1000000 || price.value <= minPrice) {
       price.setCustomValidity('Цена за ночь должна быть от ' + minPrice + ' до 1000000.');
     } else {
@@ -325,7 +339,7 @@ function editForm() {
     }
   }
 
-  roomsNumber.addEventListener('change', function () {
+  roomsNumber.addEventListener('change', function() {
     switch (roomsNumber.selectedIndex) {
       case 0:
         capacity[0].disabled = true;
@@ -359,7 +373,7 @@ function editForm() {
 editForm();
 
 function onSelectTimeInOutChangeHandler(changedNode, changableNode) {
-  changedNode.addEventListener('change', function () {
+  changedNode.addEventListener('change', function() {
     var index;
     index = changedNode.selectedIndex;
     changableNode.selectedIndex = index;
@@ -376,7 +390,7 @@ function onSelectTimeInOutChangeHandler(changedNode, changableNode) {
   var errorMessageWindow = errorMessageWindowTemplate.cloneNode(true);
   var resetButton = form.querySelector('.ad-form__reset');
 
-  form.addEventListener('submit', function (evt) {
+  form.addEventListener('submit', function(evt) {
     evt.preventDefault();
     if (form.reportValidity() === true) {
       main.appendChild(succesMessageWindow);
@@ -384,24 +398,24 @@ function onSelectTimeInOutChangeHandler(changedNode, changableNode) {
     }
   });
 
-  submitButton.addEventListener('click', function () {
+  submitButton.addEventListener('click', function() {
     if (form.reportValidity() === false) {
       main.appendChild(errorMessageWindow);
       errorMessageWindow.querySelector('.error__button').autofocus = true;
     }
   });
 
-  succesMessageWindow.addEventListener('click', function () {
+  succesMessageWindow.addEventListener('click', function() {
     succesMessageWindow.parentNode.removeChild(succesMessageWindow);
   });
 
-  errorMessageWindow.addEventListener('click', function () {
+  errorMessageWindow.addEventListener('click', function() {
     errorMessageWindow.parentNode.removeChild(errorMessageWindow);
   });
   onEscKeydownHandler(succesMessageWindow);
   onEscKeydownHandler(errorMessageWindow);
 
-  resetButton.addEventListener('click', function () {
+  resetButton.addEventListener('click', function() {
     resetPage();
   });
 })();
