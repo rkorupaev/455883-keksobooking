@@ -6,7 +6,7 @@
   var priceInput = form.querySelector('#price');
   titleInput.required = true;
   window.util.setMaxMinLengthErrorMessage(titleInput, 'Адрес должен быть не длинне 100 символов.',
-    'Адрес должен быть не короче 30 символов.');
+      'Адрес должен быть не короче 30 символов.');
   priceInput.required = true;
 
   var type = form.querySelector('#type');

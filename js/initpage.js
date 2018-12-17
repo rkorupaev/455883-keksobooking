@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
 
   var MAIN_PIN_WIDTH = 65;
   var INITIAL_POSITION_MAIN_PIN_X = 570;
@@ -20,13 +20,13 @@
 
   window.util.disableElements(fieldsetList);
 
-  pinMain.addEventListener('mousedown', function(evt) {
+  pinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var initialLocationX = evt.clientX;
     var initialLocationY = evt.clientY;
 
-    var onMouseMove = function(moveEvt) {
+    var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
 
       var shift = {
@@ -51,11 +51,11 @@
       }
 
       window.util.setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X,
-        parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
+          parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
 
     };
 
-    var onMouseUp = function(upEvt) {
+    var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 
       map.classList.remove('map--faded');
