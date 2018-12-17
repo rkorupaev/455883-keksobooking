@@ -2,9 +2,6 @@
 
 (function () {
 
-  var MAIN_PIN_WIDTH = 65;
-  var INITIAL_POSITION_MAIN_PIN_X = 570;
-  var INITIAL_POSITION_MAIN_PIN_Y = 375;
   var PIN_SHIFT_X = 32;
   var PIN_SHIFT_Y = 87;
   var MAX_Y_COORDINATE = 630;
@@ -15,7 +12,7 @@
   var announcementsFilterForm = document.querySelector('.ad-form');
   var fieldsetList = announcementsFilterForm.getElementsByTagName('fieldset');
   var addressInput = document.getElementById('address');
-  addressInput.value = INITIAL_POSITION_MAIN_PIN_X + ' , ' + INITIAL_POSITION_MAIN_PIN_Y;
+  addressInput.value = pinMain.offsetLeft + PIN_SHIFT_X + ' , ' + (pinMain.offsetTop + PIN_SHIFT_Y);
   addressInput.readOnly = true;
 
   window.util.disableElements(fieldsetList);
@@ -44,8 +41,8 @@
         pinMain.style.top = MAX_Y_COORDINATE + 'px';
       } else if (pinMain.offsetTop <= MIN_Y_COORDINATE) {
         pinMain.style.top = MIN_Y_COORDINATE + 'px';
-      } else if (pinMain.offsetLeft + MAIN_PIN_WIDTH >= map.clientWidth) {
-        pinMain.style.left = map.clientWidth - MAIN_PIN_WIDTH + 'px';
+      } else if (pinMain.offsetLeft + window.util.MAIN_PIN_WIDTH >= map.clientWidth) {
+        pinMain.style.left = map.clientWidth - window.util.MAIN_PIN_WIDTH + 'px';
       } else if (pinMain.offsetLeft <= 0) {
         pinMain.style.left = '0px';
       }
