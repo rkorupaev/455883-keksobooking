@@ -9,8 +9,8 @@
 //     });
 //   });
 // })();
-
-
+//
+//
 // function createDataArray(infoArray, type) {
 //   var similarAnnouncement = [];
 //   similarAnnouncement = infoArray.filter(function (announcement) {

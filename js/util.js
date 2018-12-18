@@ -145,6 +145,7 @@
     onCardCloseButtonClickHandler: onCardCloseButtonClickHandler,
     setMaxMinLengthErrorMessage: setMaxMinLengthErrorMessage,
     onSelectTimeInOutChangeHandler: onSelectTimeInOutChangeHandler,
-    resetPage: resetPage
+    resetPage: resetPage,
+    MAIN_PIN_WIDTH: MAIN_PIN_WIDTH
   };
 })();
