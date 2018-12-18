@@ -39,14 +39,16 @@
       var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
       var pins = [];
       for (var i = 0; i < announcementsInfoLoaded.length; i++) {
-        var pin = pinTemplate.cloneNode(true);
-        pin.style = 'left: ' + announcementsInfoLoaded[i].location.x + 'px; top: ' + announcementsInfoLoaded[i].location.y + 'px;';
-        pin.querySelector('img').src = announcementsInfoLoaded[i].author.avatar;
-        pin.querySelector('img').alt = announcementsInfoLoaded[i].offer.title;
-        pins.push(pin);
+        if ('offer' in announcementsInfoLoaded[i]) {
+          var pin = pinTemplate.cloneNode(true);
+          pin.style = 'left: ' + announcementsInfoLoaded[i].location.x + 'px; top: ' + announcementsInfoLoaded[i].location.y + 'px;';
+          pin.querySelector('img').src = announcementsInfoLoaded[i].author.avatar;
+          pin.querySelector('img').alt = announcementsInfoLoaded[i].offer.title;
+          pins.push(pin);
 
-        onPinButtonClickHandler(pin, announcementsInfoLoaded[i]);
-        onPinButtonKeydownHandler(announcementsInfoLoaded[i]);
+          onPinButtonClickHandler(pin, announcementsInfoLoaded[i]);
+          onPinButtonKeydownHandler(announcementsInfoLoaded[i]);
+        }
       }
       placePins(pins);
     });
