@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+(function() {
 
   var ESC_KEY_CODE = 27;
   var ENTER_KEY_CODE = 13;
@@ -35,25 +35,27 @@
   }
 
   function createPins() {
-    window.backend.load(function (announcementsInfoLoaded) {
+    window.backend.load(function(announcementsInfoLoaded) {
       var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
       var pins = [];
       for (var i = 0; i < announcementsInfoLoaded.length; i++) {
-        var pin = pinTemplate.cloneNode(true);
-        pin.style = 'left: ' + announcementsInfoLoaded[i].location.x + 'px; top: ' + announcementsInfoLoaded[i].location.y + 'px;';
-        pin.querySelector('img').src = announcementsInfoLoaded[i].author.avatar;
-        pin.querySelector('img').alt = announcementsInfoLoaded[i].offer.title;
-        pins.push(pin);
+        if ('offer' in announcementsInfoLoaded[i]) {
+          var pin = pinTemplate.cloneNode(true);
+          pin.style = 'left: ' + announcementsInfoLoaded[i].location.x + 'px; top: ' + announcementsInfoLoaded[i].location.y + 'px;';
+          pin.querySelector('img').src = announcementsInfoLoaded[i].author.avatar;
+          pin.querySelector('img').alt = announcementsInfoLoaded[i].offer.title;
+          pins.push(pin);
 
-        onPinButtonClickHandler(pin, announcementsInfoLoaded[i]);
-        onPinButtonKeydownHandler(announcementsInfoLoaded[i]);
+          onPinButtonClickHandler(pin, announcementsInfoLoaded[i]);
+          onPinButtonKeydownHandler(announcementsInfoLoaded[i]);
+        }
       }
       placePins(pins);
     });
   }
 
   function onPinButtonClickHandler(pin, announcementInfo) {
-    pin.addEventListener('click', function () {
+    pin.addEventListener('click', function() {
       var tempoDom = document.querySelector('.map').querySelector('.popup');
       if (tempoDom === null) {
         window.card.show(announcementInfo);
@@ -66,7 +68,7 @@
   }
 
   function onPinButtonKeydownHandler(announcementInfo) {
-    document.addEventListener('keydown', function (evt) {
+    document.addEventListener('keydown', function(evt) {
       var tempoDom = document.querySelector('.map').querySelector('.popup');
       if (evt.keyCode === ENTER_KEY_CODE) {
         if (tempoDom === null) {
@@ -81,13 +83,13 @@
   }
 
   function onCardCloseButtonClickHandler(button, container, element) {
-    button.addEventListener('click', function () {
+    button.addEventListener('click', function() {
       container.removeChild(element);
     });
   }
 
   function onEscKeydownHandler(element) {
-    document.addEventListener('keydown', function (evt) {
+    document.addEventListener('keydown', function(evt) {
       if (evt.keyCode === ESC_KEY_CODE) {
         element.remove();
       }
@@ -99,7 +101,7 @@
   }
 
   function setMaxMinLengthErrorMessage(node, maxMessage, minMessage) {
-    node.addEventListener('input', function () {
+    node.addEventListener('input', function() {
       if (node.value.length >= 100) {
         node.setCustomValidity(maxMessage);
       } else if (node.value.length <= 30) {
@@ -111,7 +113,7 @@
   }
 
   function onSelectTimeInOutChangeHandler(changedNode, changableNode) {
-    changedNode.addEventListener('change', function () {
+    changedNode.addEventListener('change', function() {
       var index;
       index = changedNode.selectedIndex;
       changableNode.selectedIndex = index;
