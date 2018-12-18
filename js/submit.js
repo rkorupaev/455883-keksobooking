@@ -16,16 +16,19 @@
       window.upload(new FormData(form), function() {
         main.appendChild(succesMessageWindow);
         window.util.resetPage();
+      }, function() {
+          main.appendChild(errorMessageWindow);
+          errorMessageWindow.querySelector('.error__button').autofocus = true;
       });
     }
   });
 
-  submitButton.addEventListener('click', function() {
-    if (form.reportValidity() === false) {
-      main.appendChild(errorMessageWindow);
-      errorMessageWindow.querySelector('.error__button').autofocus = true;
-    }
-  });
+  // submitButton.addEventListener('click', function() {
+  //   if (form.reportValidity() === false) {
+  //     main.appendChild(errorMessageWindow);
+  //     errorMessageWindow.querySelector('.error__button').autofocus = true;
+  //   }
+  // });
 
   succesMessageWindow.addEventListener('click', function() {
     succesMessageWindow.parentNode.removeChild(succesMessageWindow);
