@@ -3,7 +3,7 @@
 (function () {
   var uploadURL = 'https://js.dump.academy/keksobooking';
 
-  window.upload = function (data, onSuccess, onError) {
+  function upload (data, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -21,7 +21,7 @@
 
   var downloadURL = 'https://js.dump.academy/keksobooking/data';
 
-  window.load = function (onSuccess) {
+  function load (onSuccess) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.open('GET', downloadURL);
@@ -32,4 +32,11 @@
 
     xhr.send();
   };
+
+
+  window.backend = {
+    upload: upload,
+    load: load
+  }
+
 })();

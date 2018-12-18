@@ -35,7 +35,7 @@
   }
 
   function createPins() {
-    window.load(function (announcementsInfoLoaded) {
+    window.backend.load(function (announcementsInfoLoaded) {
       var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
       var pins = [];
       for (var i = 0; i < announcementsInfoLoaded.length; i++) {
