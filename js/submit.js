@@ -2,7 +2,6 @@
 
 (function () {
   var form = document.querySelector('.ad-form');
-  var submitButton = form.querySelector('.ad-form__submit');
   var main = document.querySelector('main');
   var succesMessageWindowTemplate = document.querySelector('#success').content.querySelector('.success');
   var succesMessageWindow = succesMessageWindowTemplate.cloneNode(true);
@@ -13,15 +12,13 @@
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     if (form.reportValidity() === true) {
-      main.appendChild(succesMessageWindow);
-      window.util.resetPage();
-    }
-  });
-
-  submitButton.addEventListener('click', function () {
-    if (form.reportValidity() === false) {
-      main.appendChild(errorMessageWindow);
-      errorMessageWindow.querySelector('.error__button').autofocus = true;
+      window.upload(new FormData(form), function () {
+        main.appendChild(succesMessageWindow);
+        window.util.resetPage();
+      }, function () {
+        main.appendChild(errorMessageWindow);
+        errorMessageWindow.querySelector('.error__button').autofocus = true;
+      });
     }
   });
 
