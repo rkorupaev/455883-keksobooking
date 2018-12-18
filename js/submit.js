@@ -12,7 +12,7 @@
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     if (form.reportValidity() === true) {
-      window.upload(new FormData(form), function () {
+      window.backend.upload(new FormData(form), function () {
         main.appendChild(succesMessageWindow);
         window.util.resetPage();
       }, function () {
