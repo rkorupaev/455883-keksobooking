@@ -138,6 +138,11 @@
     window.util.disableElements(fieldsetList);
   }
 
+  function onSuccessHandler(container, succesMessageWindow) {
+    container.appendChild(succesMessageWindow);
+    window.util.resetPage();
+  }
+
   window.util = {
     disableElements: disableElements,
     enableElements: enableElements,
@@ -148,6 +153,7 @@
     setMaxMinLengthErrorMessage: setMaxMinLengthErrorMessage,
     onSelectTimeInOutChangeHandler: onSelectTimeInOutChangeHandler,
     resetPage: resetPage,
-    MAIN_PIN_WIDTH: MAIN_PIN_WIDTH
+    MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,
+    onSuccessHandler: onSuccessHandler
   };
 })();

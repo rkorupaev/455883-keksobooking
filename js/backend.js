@@ -5,12 +5,12 @@
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'json';
 
-  function upload(data, onSuccess, onError) {
+  function upload(data, onLoad, onError) {
     var uploadURL = 'https://js.dump.academy/keksobooking';
 
     xhr.addEventListener('load', function() {
       if (xhr.status === 200) {
-        onSuccess(xhr.response);
+        onLoad(xhr.response);
       } else {
         onError(xhr.status);
       }
