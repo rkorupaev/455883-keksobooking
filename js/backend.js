@@ -16,6 +16,16 @@
       }
     });
 
+    xhr.addEventListener('error', function() {
+      onError('Произошла ошибка. Обратитесь к администратору.')
+    })
+
+    xhr.addEventListener('timeout', function() {
+      onError('Превышено время ожидания ответа от сервера.')
+    })
+
+    xhr.timeout = 10000;
+
     xhr.open('POST', uploadURL);
     xhr.send(data);
   };
@@ -31,6 +41,16 @@
         onError(xhr.status);
       }
     });
+
+    xhr.addEventListener('error', function() {
+      onError('Произошла ошибка. Обратитесь к администратору.')
+    })
+
+    xhr.addEventListener('timeout', function() {
+      onError('Превышено время ожидания ответа от сервера.')
+    })
+
+    xhr.timeout = 10000;
 
     xhr.send();
   };
