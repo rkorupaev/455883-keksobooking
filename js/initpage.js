@@ -58,7 +58,7 @@
       map.classList.remove('map--faded');
       announcementsFilterForm.classList.remove('ad-form--disabled');
       window.util.enableElements(fieldsetList);
-      window.util.createPins(window.initInfo);
+      window.util.createPins(window.info.initInfo);
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
