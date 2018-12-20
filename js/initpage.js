@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   var PIN_SHIFT_X = 32;
   var PIN_SHIFT_Y = 87;
   var MAX_Y_COORDINATE = 630;
@@ -55,10 +54,16 @@
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 
-      map.classList.remove('map--faded');
-      announcementsFilterForm.classList.remove('ad-form--disabled');
-      window.util.enableElements(fieldsetList);
-      window.util.createPins(window.info.initInfo);
+      // если данные не загружены, загружаем их с сервера
+      if (!window.info.initInfo) {
+        window.backend.load(function(data) {
+          window.info.initInfo = data;
+          map.classList.remove('map--faded');
+          announcementsFilterForm.classList.remove('ad-form--disabled');
+          window.util.enableElements(fieldsetList);
+          window.util.createPins(window.info.initInfo);
+        });
+      }
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);

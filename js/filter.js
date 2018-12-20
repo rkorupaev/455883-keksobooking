@@ -1,28 +1,9 @@
 'use strict';
 
 (function() {
-  window.backend.load(function(initInfo) {
     var filterForm = document.querySelector('.map__filters');
     var typeFilter = document.getElementById('housing-type');
     var typeFilterOptionList = typeFilter.querySelectorAll('option');
-    var similarAnnouncement = [];
-
-    similarAnnouncement = initInfo;
-    var filteredAnnouncements = [];
-    console.log(similarAnnouncement);
-
-    // typeFilter.addEventListener('change', function() {
-    //   if (typeFilterOptionList[typeFilter.selectedIndex].value === 'any') {
-    //     similarAnnouncement = window.info.initInfo;
-    //   } else {
-    //     similarAnnouncement = window.info.initInfo.filter(function(announcement) {
-    //       return announcement.offer.type === typeFilterOptionList[typeFilter.selectedIndex].value;
-    //     });
-    //   }
-    //   window.util.removePins();
-    //   window.util.createPins(similarAnnouncement);
-    //   return similarAnnouncement;
-    // });
 
     var priceFilter = document.getElementById('housing-price');
     var priceFilterOptionList = priceFilter.querySelectorAll('option');
@@ -30,58 +11,31 @@
     var roomsFilter = document.getElementById('housing-rooms');
     var roomsFilterOptionList = roomsFilter.querySelectorAll('option');
 
-    // roomsFilter.addEventListener('change', function() {
-    //   if (roomsFilterOptionList[roomsFilter.selectedIndex].value === 'any') {
-    //     similarAnnouncement = window.info.initInfo;
-    //   } else {
-    //     similarAnnouncement = window.info.initInfo.filter(function(announcement) {
-    //       return announcement.offer.rooms === parseInt(roomsFilterOptionList[roomsFilter.selectedIndex].value, 10);
-    //     });
-    //   }
-    //   window.util.removePins();
-    //   window.util.createPins(similarAnnouncement);
-    //   return similarAnnouncement;
-    // });
-
     var guestsFilter = document.getElementById('housing-guests');
     var guestsFilterOptionList = guestsFilter.querySelectorAll('option');
 
-    // guestsFilter.addEventListener('change', function() {
-    //   if (guestsFilterOptionList[guestsFilter.selectedIndex].value === 'any') {
-    //     similarAnnouncement = window.info.initInfo;
-    //   } else {
-    //     similarAnnouncement = window.info.initInfo.filter(function(announcement) {
-    //       return announcement.offer.guests === parseInt(guestsFilterOptionList[guestsFilter.selectedIndex].value, 10);
-    //     });
-    //   }
-    //   window.util.removePins();
-    //   window.util.createPins(similarAnnouncement);
-    //   return similarAnnouncement;
-    // });
-
-
     var currentFilters = [{
-        id: 'housing-type',
         value: 'any',
-        offer: type
+        offer: 'type'
       }, {
-        id: 'housing-price',
         value: 'any',
         offer: 'price'
       },
       {
-        id: 'housing-rooms',
         value: 'any',
         offer: 'rooms'
       },
       {
-        id: 'housing-guests',
         value: 'any',
         offer: 'guests'
       }
     ];
 
     filterForm.addEventListener('change', function(evt) {
+      // debugger;
+      var filteredAnnouncements = window.info.initInfo;
+      console.log(filteredAnnouncements);
+
       switch (evt.target) {
         case typeFilter:
           currentFilters[0].value = typeFilterOptionList[typeFilter.selectedIndex].value;
@@ -98,21 +52,46 @@
       }
 
       console.log(currentFilters);
- debugger;
+
       for (var i = 0; i < currentFilters.length; i++) {
-        if (currentFilters[i].value === 'any') {
-          return;
+        if (currentFilters[i].offer === 'type') {
+          if (currentFilters[i].value !== 'any') {
+            filteredAnnouncements = filteredAnnouncements.filter(function(announcement) {
+              return announcement.offer[currentFilters[i].offer] === currentFilters[i].value;
+            });
+          }
+        } else if (currentFilters[i].offer === 'price') {
+          if (currentFilters[i].value !== 'any') {
+            filteredAnnouncements = filteredAnnouncements.filter(function(announcement) {
+              var price = announcement.offer[currentFilters[i].offer];
+
+              switch (currentFilters[i].value) {
+                case 'middle':
+                  return price > 10000 && price < 50000;
+                case 'low':
+                  return price < 10000;
+                case 'hign':
+                  return price > 50000;
+                default:
+                  return false;
+              }
+            });
+          }
+        } else if (currentFilters[i].offer === 'guests' || currentFilters[i].offer === 'rooms') {
+          if (currentFilters[i].value !== 'any') {
+            filteredAnnouncements = filteredAnnouncements.filter(function(announcement) {
+              return announcement.offer[currentFilters[i].offer] === parseInt(currentFilters[i].value, 10);
+            })
+          }
         } else {
-          filteredAnnouncement = similarAnnouncement.filter(function(announcement) {
-            return announcement.offer.currentFilters[i].offer = currentFilters[i].value;
-          });
+          // фичи
+          // создаем массив активных фич с фильтра
+          // проходимся по массиву и обьявление нам подходит,
+          // если все требуемые фичи в фильтре встречаются в массиве features внутри offer
         }
-      };
-      console.log(filteredAnnouncement);
+      }
+      console.log(filteredAnnouncements);
+      window.util.removePins();
+      window.util.createPins(filteredAnnouncements);
     });
-
-
-
-
-  });
 })();
