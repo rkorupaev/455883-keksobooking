@@ -130,7 +130,7 @@
     addressInput.value = INITIAL_POSITION_MAIN_PIN_X + (MAIN_PIN_WIDTH / 2) + ' , ' + (INITIAL_POSITION_MAIN_PIN_Y + 85);
     map.classList.add('map--faded');
     form.classList.add('ad-form--disabled');
-    removePins(mapElementsToDelete, pinContainer);
+    clearMap(mapElementsToDelete, pinContainer);
     form.reset();
     window.util.disableElements(fieldsetList);
   }
@@ -140,13 +140,15 @@
     window.util.resetPage();
   }
 
-  function removePins() {
+  function clearMap() {
     var map = document.querySelector('.map');
     var mapElementsToDelete = map.querySelectorAll('.map__pin');
     var pinContainer = map.querySelector('.map__pins');
+    var card = map.querySelector('.map__card');
     for (var i = 1; i < mapElementsToDelete.length; i++) {
       pinContainer.removeChild(mapElementsToDelete[i]);
     }
+    card.remove();
   }
 
   window.util = {
@@ -161,6 +163,6 @@
     resetPage: resetPage,
     MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,
     onSuccessHandler: onSuccessHandler,
-    removePins: removePins
+    clearMap: clearMap
   };
 })();
