@@ -148,7 +148,9 @@
     for (var i = 1; i < mapElementsToDelete.length; i++) {
       pinContainer.removeChild(mapElementsToDelete[i]);
     }
-    card.remove();
+    if (card) {
+      card.remove();
+    };
   }
 
   window.util = {

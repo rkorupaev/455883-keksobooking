@@ -15,8 +15,6 @@
   var guestsFilterOptionList = guestsFilter.querySelectorAll('option');
 
   var featuresFilter = document.getElementById('housing-features');
-  var featuresFilterInputList = featuresFilter.querySelectorAll('input');
-
 
   var currentFilters = [{
       value: 'any',
@@ -40,7 +38,6 @@
   ];
 
   filterForm.addEventListener('change', function(evt) {
-    // debugger;
     var filteredAnnouncements = window.info.initInfo;
     console.log(filteredAnnouncements);
 
@@ -57,11 +54,15 @@
       case guestsFilter:
         currentFilters[3].value = guestsFilterOptionList[guestsFilter.selectedIndex].value;
         break;
-      case featuresFilter:
-        currentFilters[4].features = featuresFilterInputList[guestsFilter.selectedIndex].value;
-        break;
     }
 
+    var tempoArray = featuresFilter.querySelectorAll('input:checked');
+    tempoArray.forEach(function(item) {
+      currentFilters[4].features = [];
+      currentFilters[4].features.push(item.defaultValue);
+    });
+
+    console.log(currentFilters[4].features);
     console.log(currentFilters);
 
     for (var i = 0; i < currentFilters.length; i++) {
@@ -94,12 +95,26 @@
             return announcement.offer[currentFilters[i].offer] === parseInt(currentFilters[i].value, 10);
           })
         }
-      } else {
-        // фичи
-        // создаем массив активных фич с фильтра
-        // проходимся по массиву и обьявление нам подходит,
-        // если все требуемые фичи в фильтре встречаются в массиве features внутри offer
+      } else if (currentFilters[i].features.length !== 0) {
+        // currentFilters[4].features.forEach(function(feature) {
+        //   for (var j = 0; j < filteredAnnouncements.length; j++) {
+        //     for (var b = 0; b < filteredAnnouncements[j].offer.features.length; b++) {
+        //       if (feature.defaultValue === filteredAnnouncements[j].offer.features[b]) {
+        //         var count = 0;
+        //         count++;
+
+        //         return count;
+        //       }
+        //     }
+        //     if (count < filteredAnnouncements[j].offer.features.length) {
+        //       filteredAnnouncements.splice(j, 1);
+        //       return filteredAnnouncements;
+        //     }
+        //   }
+        // });
+
       }
+
     }
     console.log(filteredAnnouncements);
     window.util.clearMap();
