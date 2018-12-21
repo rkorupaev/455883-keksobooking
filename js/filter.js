@@ -102,6 +102,7 @@
                 isFeature = true;
                 continue;
               }
+
             }
             if (isFeature === false) {
               filteredAnnouncements.splice(j, 1);
@@ -114,7 +115,9 @@
 
     }
     console.log(filteredAnnouncements);
-    window.util.clearMap();
-    window.util.createPins(filteredAnnouncements);
+    window.setTimeout(function() {
+      window.util.clearMap();
+      window.util.createPins(filteredAnnouncements);
+    }, 500);
   });
 })();
