@@ -34,10 +34,10 @@
         price.placeholder = '10000';
         break;
     }
-    check();
+    checkPrice();
   });
 
-  function check() {
+  function checkPrice() {
     if (price.value >= 1000000 || price.value <= minPrice) {
       price.setCustomValidity('Цена за ночь должна быть от ' + minPrice + ' до 1000000.');
       price.style.border = '1px solid red';

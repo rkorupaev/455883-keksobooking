@@ -5,14 +5,14 @@
   var PIN_SHIFT_Y = 87;
   var MAX_Y_COORDINATE = 630;
   var MIN_Y_COORDINATE = 130;
+  var INITIAL_POSITION_MAIN_PIN_X = pinMain.offsetLeft;
+  var INITIAL_POSITION_MAIN_PIN_Y = pinMain.offsetTop;
 
   var pinMain = document.querySelector('.map__pin--main');
   var map = document.querySelector('.map');
   var announcementsFilterForm = document.querySelector('.ad-form');
   var fieldsetList = announcementsFilterForm.getElementsByTagName('fieldset');
   var addressInput = document.getElementById('address');
-  var INITIAL_POSITION_MAIN_PIN_X = pinMain.offsetLeft;
-  var INITIAL_POSITION_MAIN_PIN_Y = pinMain.offsetTop;
 
   addressInput.value = INITIAL_POSITION_MAIN_PIN_X + PIN_SHIFT_X + ' , ' + (INITIAL_POSITION_MAIN_PIN_Y + PIN_SHIFT_Y);
   addressInput.readOnly = true;
