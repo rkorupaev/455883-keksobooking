@@ -47,7 +47,7 @@
     }
   }
 
-  price.addEventListener('input', check);
+  price.addEventListener('input', checkPrice);
 
   var timeIn = form.querySelector('#timein');
   var timeOut = form.querySelector('#timeout');
