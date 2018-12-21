@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
   var filterForm = document.querySelector('.map__filters');
   var typeFilter = document.getElementById('housing-type');
   var typeFilterOptionList = typeFilter.querySelectorAll('option');
@@ -17,30 +17,28 @@
   var featuresFilter = document.getElementById('housing-features');
 
   var currentFilters = [{
-      value: 'any',
-      offer: 'type'
-    }, {
-      value: 'any',
-      offer: 'price'
-    },
-    {
-      value: 'any',
-      offer: 'rooms'
-    },
-    {
-      value: 'any',
-      offer: 'guests'
-    },
-    {
-      offer: 'features',
-      features: []
-    }
+    value: 'any',
+    offer: 'type'
+  }, {
+    value: 'any',
+    offer: 'price'
+  },
+  {
+    value: 'any',
+    offer: 'rooms'
+  },
+  {
+    value: 'any',
+    offer: 'guests'
+  },
+  {
+    offer: 'features',
+    features: []
+  }
   ];
 
-  filterForm.addEventListener('change', function(evt) {
+  filterForm.addEventListener('change', function (evt) {
     var filteredAnnouncements = window.info.initInfo;
-
-    console.log(filteredAnnouncements);
 
     switch (evt.target) {
       case typeFilter:
@@ -59,19 +57,16 @@
 
     currentFilters[4].features = featuresFilter.querySelectorAll('input:checked');
 
-    console.log(currentFilters[4].features);
-    console.log(currentFilters);
-
     for (var i = 0; i < currentFilters.length; i++) {
       if (currentFilters[i].offer === 'type') {
         if (currentFilters[i].value !== 'any') {
-          filteredAnnouncements = filteredAnnouncements.filter(function(announcement) {
+          filteredAnnouncements = filteredAnnouncements.filter(function (announcement) {
             return announcement.offer[currentFilters[i].offer] === currentFilters[i].value;
           });
         }
       } else if (currentFilters[i].offer === 'price') {
         if (currentFilters[i].value !== 'any') {
-          filteredAnnouncements = filteredAnnouncements.filter(function(announcement) {
+          filteredAnnouncements = filteredAnnouncements.filter(function (announcement) {
             var price = announcement.offer[currentFilters[i].offer];
 
             switch (currentFilters[i].value) {
@@ -88,16 +83,16 @@
         }
       } else if (currentFilters[i].offer === 'guests' || currentFilters[i].offer === 'rooms') {
         if (currentFilters[i].value !== 'any') {
-          filteredAnnouncements = filteredAnnouncements.filter(function(announcement) {
+          filteredAnnouncements = filteredAnnouncements.filter(function (announcement) {
             return announcement.offer[currentFilters[i].offer] === parseInt(currentFilters[i].value, 10);
-          })
+          });
         }
       } else if (currentFilters[4].features.length !== 0) {
         var temp = [];
         for (var j = 0; j < filteredAnnouncements.length; j++) {
           var isAnnouncementAcceptable = true;
-          currentFilters[4].features.forEach(function(feature){
-            if (filteredAnnouncements[j].offer.features.indexOf(feature.defaultValue) === -1){
+          currentFilters[4].features.forEach(function (feature) {
+            if (filteredAnnouncements[j].offer.features.indexOf(feature.defaultValue) === -1) {
               isAnnouncementAcceptable = false;
             }
           });
@@ -107,10 +102,9 @@
         }
         filteredAnnouncements = temp;
       }
-
     }
-    console.log(filteredAnnouncements);
-    window.setTimeout(function() {
+
+    window.setTimeout(function () {
       window.util.clearMap();
       window.util.createPins(filteredAnnouncements);
     }, 500);
