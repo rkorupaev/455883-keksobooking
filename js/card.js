@@ -31,9 +31,7 @@
 
     card.querySelector('.popup__avatar').src = info.author.avatar;
 
-
     makePhotoBlock(info.offer.photos);
-
 
     var element = document.querySelectorAll('.popup__photo');
 
