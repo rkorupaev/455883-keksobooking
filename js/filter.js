@@ -40,7 +40,7 @@
   var lastTimeout;
 
   filterForm.addEventListener('change', function (evt) {
-    var filteredAnnouncements = window.info.initInfo;
+    var filteredAnnouncements = window.initpage.initInfo;
 
     switch (evt.target) {
       case typeFilter:

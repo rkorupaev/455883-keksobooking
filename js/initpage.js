@@ -11,7 +11,10 @@
   var announcementsFilterForm = document.querySelector('.ad-form');
   var fieldsetList = announcementsFilterForm.getElementsByTagName('fieldset');
   var addressInput = document.getElementById('address');
-  addressInput.value = pinMain.offsetLeft + PIN_SHIFT_X + ' , ' + (pinMain.offsetTop + PIN_SHIFT_Y);
+  var INITIAL_POSITION_MAIN_PIN_X = pinMain.offsetLeft;
+  var INITIAL_POSITION_MAIN_PIN_Y = pinMain.offsetTop;
+
+  addressInput.value = INITIAL_POSITION_MAIN_PIN_X + PIN_SHIFT_X + ' , ' + (INITIAL_POSITION_MAIN_PIN_Y + PIN_SHIFT_Y);
   addressInput.readOnly = true;
 
   window.util.disableElements(fieldsetList);
@@ -53,13 +56,13 @@
 
     function onMouseUp(upEvt) {
       upEvt.preventDefault();
-      if (!window.info.initInfo) {
+      if (!window.initpage.initInfo) {
         window.backend.load(function (data) {
-          window.info.initInfo = data;
+          window.initpage.initInfo = data;
           map.classList.remove('map--faded');
           announcementsFilterForm.classList.remove('ad-form--disabled');
           window.util.enableElements(fieldsetList);
-          window.util.createPins(window.info.initInfo);
+          window.util.createPins(window.initpage.initInfo);
         }, function () {
           var main = document.querySelector('main');
           var errorMessageWindowTemplate = document.querySelector('#error').content.querySelector('.error');
@@ -76,4 +79,11 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  window.initpage = {
+    INITIAL_POSITION_MAIN_PIN_X: INITIAL_POSITION_MAIN_PIN_X,
+    INITIAL_POSITION_MAIN_PIN_Y: INITIAL_POSITION_MAIN_PIN_Y,
+    initInfo: null
+  };
+
 })();

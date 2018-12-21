@@ -4,8 +4,6 @@
 
   var ESC_KEY_CODE = 27;
   var ENTER_KEY_CODE = 13;
-  var INITIAL_POSITION_MAIN_PIN_X = 570;
-  var INITIAL_POSITION_MAIN_PIN_Y = 375;
   var MAIN_PIN_WIDTH = 65;
   var MAX_INPUT_LENGTH = 100;
   var MIN_INPUT_LENGTH = 30;
@@ -137,8 +135,8 @@
     var pinMain = map.querySelector('.map__pin--main');
     var price = announcementsFilterForm.querySelector('#price');
 
-    pinMain.style.left = INITIAL_POSITION_MAIN_PIN_X + 'px';
-    pinMain.style.top = INITIAL_POSITION_MAIN_PIN_Y + 'px';
+    pinMain.style.left = window.initpage.INITIAL_POSITION_MAIN_PIN_X + 'px';
+    pinMain.style.top = window.initpage.INITIAL_POSITION_MAIN_PIN_Y + 'px';
 
     form.reset();
     clearMap();
