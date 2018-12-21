@@ -39,6 +39,7 @@
 
   filterForm.addEventListener('change', function(evt) {
     var filteredAnnouncements = window.info.initInfo;
+
     console.log(filteredAnnouncements);
 
     switch (evt.target) {
@@ -56,11 +57,7 @@
         break;
     }
 
-    var tempoArray = featuresFilter.querySelectorAll('input:checked');
-    tempoArray.forEach(function(item) {
-      currentFilters[4].features = [];
-      currentFilters[4].features.push(item.defaultValue);
-    });
+    currentFilters[4].features = featuresFilter.querySelectorAll('input:checked');
 
     console.log(currentFilters[4].features);
     console.log(currentFilters);
@@ -95,23 +92,23 @@
             return announcement.offer[currentFilters[i].offer] === parseInt(currentFilters[i].value, 10);
           })
         }
-      } else if (currentFilters[i].features.length !== 0) {
-        // currentFilters[4].features.forEach(function(feature) {
-        //   for (var j = 0; j < filteredAnnouncements.length; j++) {
-        //     for (var b = 0; b < filteredAnnouncements[j].offer.features.length; b++) {
-        //       if (feature.defaultValue === filteredAnnouncements[j].offer.features[b]) {
-        //         var count = 0;
-        //         count++;
-
-        //         return count;
-        //       }
-        //     }
-        //     if (count < filteredAnnouncements[j].offer.features.length) {
-        //       filteredAnnouncements.splice(j, 1);
-        //       return filteredAnnouncements;
-        //     }
-        //   }
-        // });
+      } else if (currentFilters[4].features.length !== 0) {
+        debugger;
+        currentFilters[4].features.forEach(function(feature) {
+          for (var j = 0; j < filteredAnnouncements.length; j++) {
+            var isFeature = false;
+            for (var b = 0; b < filteredAnnouncements[j].offer.features.length; b++) {
+              if (feature.defaultValue === filteredAnnouncements[j].offer.features[b]) {
+                isFeature = true;
+                continue;
+              }
+            }
+            if (isFeature === false) {
+              filteredAnnouncements.splice(j, 1);
+              return filteredAnnouncements;
+            }
+          }
+        });
 
       }
 
