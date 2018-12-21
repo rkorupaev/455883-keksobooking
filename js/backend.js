@@ -3,7 +3,6 @@
 (function () {
   var STATUS_CODE_OK = 200;
 
-
   function upload(data, onLoad, onError) {
     var uploadURL = 'https://js.dump.academy/keksobooking';
 
