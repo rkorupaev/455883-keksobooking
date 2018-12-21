@@ -125,6 +125,7 @@
     var form = document.querySelector('.ad-form');
     var announcementsFilterForm = document.querySelector('.ad-form');
     var fieldsetList = announcementsFilterForm.getElementsByTagName('fieldset');
+    var capacitySelect = document.getElementById('capacity');
     var addressInput = document.getElementById('address');
 
     addressInput.value = INITIAL_POSITION_MAIN_PIN_X + (MAIN_PIN_WIDTH / 2) + ' , ' + (INITIAL_POSITION_MAIN_PIN_Y + 85);
@@ -132,6 +133,7 @@
     form.classList.add('ad-form--disabled');
     clearMap();
     form.reset();
+    capacitySelect.selectedIndex = 2;
     window.util.disableElements(fieldsetList);
   }
 
