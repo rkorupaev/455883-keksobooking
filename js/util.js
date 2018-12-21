@@ -135,6 +135,7 @@
     form.reset();
     capacitySelect.selectedIndex = 2;
     window.util.disableElements(fieldsetList);
+    window.info.initInfo = null;
   }
 
   function onSuccessHandler(container, succesMessageWindow) {
