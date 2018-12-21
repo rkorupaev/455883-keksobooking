@@ -60,7 +60,13 @@
           announcementsFilterForm.classList.remove('ad-form--disabled');
           window.util.enableElements(fieldsetList);
           window.util.createPins(window.info.initInfo);
-        }, function () {});
+        }, function () {
+          var main = document.querySelector('main');
+          var errorMessageWindowTemplate = document.querySelector('#error').content.querySelector('.error');
+          var errorMessageWindow = errorMessageWindowTemplate.cloneNode(true);
+          main.appendChild(errorMessageWindow);
+          errorMessageWindow.querySelector('.error__button').autofocus = true;
+        });
       }
 
       document.removeEventListener('mousemove', onMouseMove);

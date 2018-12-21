@@ -152,11 +152,6 @@
     price.placeholder = '1000';
   }
 
-  function onSuccessHandler(container, succesMessageWindow) {
-    container.appendChild(succesMessageWindow);
-    window.util.resetPage();
-  }
-
   function clearMap() {
     var map = document.querySelector('.map');
     var mapElementsToDelete = map.querySelectorAll('.map__pin');
@@ -181,7 +176,6 @@
     onSelectTimeInOutChangeHandler: onSelectTimeInOutChangeHandler,
     resetPage: resetPage,
     MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,
-    onSuccessHandler: onSuccessHandler,
     clearMap: clearMap
   };
 })();

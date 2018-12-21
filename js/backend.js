@@ -3,11 +3,12 @@
 (function () {
   var STATUS_CODE_OK = 200;
 
-  var xhr = new XMLHttpRequest();
-  xhr.responseType = 'json';
 
   function upload(data, onLoad, onError) {
     var uploadURL = 'https://js.dump.academy/keksobooking';
+
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
       if (xhr.status === STATUS_CODE_OK) {
@@ -33,6 +34,9 @@
 
   function load(onLoad, onError) {
     var downloadURL = 'https://js.dump.academy/keksobooking/data';
+
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
     xhr.open('GET', downloadURL);
 
     xhr.addEventListener('load', function () {
