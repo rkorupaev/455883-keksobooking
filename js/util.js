@@ -135,8 +135,8 @@
     var pinMain = map.querySelector('.map__pin--main');
     var price = announcementsFilterForm.querySelector('#price');
 
-    pinMain.style.left = window.initpage.INITIAL_POSITION_MAIN_PIN_X + 'px';
-    pinMain.style.top = window.initpage.INITIAL_POSITION_MAIN_PIN_Y + 'px';
+    pinMain.style.left = window.initpage.initialPinPositionX + 'px';
+    pinMain.style.top = window.initpage.initialPinPositionY + 'px';
 
     form.reset();
     clearMap();
@@ -144,7 +144,7 @@
     form.classList.add('ad-form--disabled');
     capacitySelect.selectedIndex = 2;
     window.util.disableElements(fieldsetList);
-    window.info.initInfo = null;
+    window.initpage.initInfo = null;
     window.util.setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X,
         parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
     price.placeholder = '1000';
