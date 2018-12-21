@@ -34,9 +34,10 @@
         price.placeholder = '10000';
         break;
     }
+    check();
   });
 
-  price.addEventListener('input', function () {
+  function check() {
     if (price.value >= 1000000 || price.value <= minPrice) {
       price.setCustomValidity('Цена за ночь должна быть от ' + minPrice + ' до 1000000.');
       price.style.border = '1px solid red';
@@ -44,7 +45,9 @@
       price.setCustomValidity('');
       price.style.border = '';
     }
-  });
+  }
+
+  price.addEventListener('input', check);
 
   var timeIn = form.querySelector('#timein');
   var timeOut = form.querySelector('#timeout');

@@ -140,10 +140,10 @@
     pinMain.style.left = INITIAL_POSITION_MAIN_PIN_X + 'px';
     pinMain.style.top = INITIAL_POSITION_MAIN_PIN_Y + 'px';
 
+    form.reset();
+    clearMap();
     map.classList.add('map--faded');
     form.classList.add('ad-form--disabled');
-    clearMap();
-    form.reset();
     capacitySelect.selectedIndex = 2;
     window.util.disableElements(fieldsetList);
     window.info.initInfo = null;
