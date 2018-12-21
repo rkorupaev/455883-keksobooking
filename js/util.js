@@ -130,7 +130,7 @@
     addressInput.value = INITIAL_POSITION_MAIN_PIN_X + (MAIN_PIN_WIDTH / 2) + ' , ' + (INITIAL_POSITION_MAIN_PIN_Y + 85);
     map.classList.add('map--faded');
     form.classList.add('ad-form--disabled');
-    clearMap(mapElementsToDelete, pinContainer);
+    clearMap();
     form.reset();
     window.util.disableElements(fieldsetList);
   }

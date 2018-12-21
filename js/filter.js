@@ -93,24 +93,19 @@
           })
         }
       } else if (currentFilters[4].features.length !== 0) {
-        debugger;
-        currentFilters[4].features.forEach(function(feature) {
-          for (var j = 0; j < filteredAnnouncements.length; j++) {
-            var isFeature = false;
-            for (var b = 0; b < filteredAnnouncements[j].offer.features.length; b++) {
-              if (feature.defaultValue === filteredAnnouncements[j].offer.features[b]) {
-                isFeature = true;
-                continue;
-              }
-
+        var temp = [];
+        for (var j = 0; j < filteredAnnouncements.length; j++) {
+          var isAnnouncementAcceptable = true;
+          currentFilters[4].features.forEach(function(feature){
+            if (filteredAnnouncements[j].offer.features.indexOf(feature.defaultValue) === -1){
+              isAnnouncementAcceptable = false;
             }
-            if (isFeature === false) {
-              filteredAnnouncements.splice(j, 1);
-              return filteredAnnouncements;
-            }
+          });
+          if (isAnnouncementAcceptable === true) {
+            temp.push(filteredAnnouncements[j]);
           }
-        });
-
+        }
+        filteredAnnouncements = temp;
       }
 
     }
