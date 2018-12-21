@@ -96,6 +96,7 @@
           currentFilters[4].features.forEach(function (feature) {
             if (filteredAnnouncements[j].offer.features.indexOf(feature.defaultValue) === -1) {
               isAnnouncementAcceptable = false;
+              return;
             }
           });
           if (isAnnouncementAcceptable) {
