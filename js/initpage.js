@@ -85,5 +85,4 @@
     INITIAL_POSITION_MAIN_PIN_Y: INITIAL_POSITION_MAIN_PIN_Y,
     initInfo: null
   };
-
 })();
