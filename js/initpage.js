@@ -56,7 +56,7 @@
 
       // если данные не загружены, загружаем их с сервера
       if (!window.info.initInfo) {
-        window.backend.load(function(data) {
+        window.backend.load(function (data) {
           window.info.initInfo = data;
           map.classList.remove('map--faded');
           announcementsFilterForm.classList.remove('ad-form--disabled');
