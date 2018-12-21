@@ -108,10 +108,13 @@
     node.addEventListener('input', function () {
       if (node.value.length >= MAX_INPUT_LENGTH) {
         node.setCustomValidity(maxMessage);
+        node.style.border = '1px solid red';
       } else if (node.value.length <= MIN_INPUT_LENGTH) {
         node.setCustomValidity(minMessage);
+        node.style.border = '1px solid red';
       } else {
         node.setCustomValidity('');
+        node.style.border = '';
       }
     });
   }
@@ -125,7 +128,6 @@
   }
 
   function resetPage() {
-    // debugger;
     var map = document.querySelector('.map');
     var form = document.querySelector('.ad-form');
     var announcementsFilterForm = document.querySelector('.ad-form');
@@ -133,11 +135,10 @@
     var capacitySelect = document.getElementById('capacity');
     var addressInput = document.getElementById('address');
     var pinMain = map.querySelector('.map__pin--main');
-
+    var price = announcementsFilterForm.querySelector('#price');
 
     pinMain.style.left = INITIAL_POSITION_MAIN_PIN_X + 'px';
     pinMain.style.top = INITIAL_POSITION_MAIN_PIN_Y + 'px';
-
 
     map.classList.add('map--faded');
     form.classList.add('ad-form--disabled');
@@ -148,6 +149,7 @@
     window.info.initInfo = null;
     window.util.setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X,
         parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
+    price.placeholder = '1000';
   }
 
   function onSuccessHandler(container, succesMessageWindow) {

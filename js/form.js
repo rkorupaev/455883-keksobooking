@@ -16,7 +16,6 @@
 
   type.addEventListener('change', function () {
     var typeIndex = form.querySelector('#type').selectedIndex;
-    debugger;
     switch (typeIndex) {
       case 0:
         minPrice = 0;
@@ -40,8 +39,10 @@
   price.addEventListener('input', function () {
     if (price.value >= 1000000 || price.value <= minPrice) {
       price.setCustomValidity('Цена за ночь должна быть от ' + minPrice + ' до 1000000.');
+      price.style.border = '1px solid red';
     } else {
       price.setCustomValidity('');
+      price.style.border = '';
     }
   });
 
