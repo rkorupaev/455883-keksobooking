@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
   var PIN_SHIFT_X = 32;
   var PIN_SHIFT_Y = 87;
   var MAX_Y_COORDINATE = 630;
@@ -16,13 +16,13 @@
 
   window.util.disableElements(fieldsetList);
 
-  pinMain.addEventListener('mousedown', function(evt) {
+  pinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var initialLocationX = evt.clientX;
     var initialLocationY = evt.clientY;
 
-    var onMouseMove = function(moveEvt) {
+    var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
 
       var shift = {
@@ -47,22 +47,20 @@
       }
 
       window.util.setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X,
-        parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
+          parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
 
     };
 
-    var onMouseUp = function(upEvt) {
-      var pinsOnMap = map.querySelectorAll('.map__pin');
+    var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
       if (!window.info.initInfo) {
-        window.backend.load(function(data) {
+        window.backend.load(function (data) {
           window.info.initInfo = data;
           map.classList.remove('map--faded');
           announcementsFilterForm.classList.remove('ad-form--disabled');
           window.util.enableElements(fieldsetList);
           window.util.createPins(window.info.initInfo);
-        }, function(message) {
-          console.log(message);
+        }, function () {
         });
       }
 
