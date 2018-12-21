@@ -98,7 +98,7 @@
               isAnnouncementAcceptable = false;
             }
           });
-          if (isAnnouncementAcceptable === true) {
+          if (isAnnouncementAcceptable) {
             temp.push(filteredAnnouncements[j]);
           }
         }

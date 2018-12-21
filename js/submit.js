@@ -11,7 +11,7 @@
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    if (form.reportValidity() === true) {
+    if (form.reportValidity()) {
       window.backend.upload(new FormData(form), function () {
         main.appendChild(succesMessageWindow);
         window.util.resetPage();
