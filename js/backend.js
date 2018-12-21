@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var STATUS_CODE_OK = 200;
 
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'json';
@@ -9,7 +10,7 @@
     var uploadURL = 'https://js.dump.academy/keksobooking';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === STATUS_CODE_OK) {
         onLoad(xhr.response);
       } else {
         onError(xhr.status);
@@ -35,7 +36,7 @@
     xhr.open('GET', downloadURL);
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === STATUS_CODE_OK) {
         onLoad(xhr.response);
       } else {
         onError(xhr.status);

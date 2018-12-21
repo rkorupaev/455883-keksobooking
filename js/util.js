@@ -7,6 +7,8 @@
   var INITIAL_POSITION_MAIN_PIN_X = 570;
   var INITIAL_POSITION_MAIN_PIN_Y = 375;
   var MAIN_PIN_WIDTH = 65;
+  var MAX_INPUT_LENGTH = 100;
+  var MIN_INPUT_LENGTH = 30;
 
   function disableElements(array) {
     for (var i = 0; i < array.length; i++) {
@@ -102,9 +104,9 @@
 
   function setMaxMinLengthErrorMessage(node, maxMessage, minMessage) {
     node.addEventListener('input', function () {
-      if (node.value.length >= 100) {
+      if (node.value.length >= MAX_INPUT_LENGTH) {
         node.setCustomValidity(maxMessage);
-      } else if (node.value.length <= 30) {
+      } else if (node.value.length <= MIN_INPUT_LENGTH) {
         node.setCustomValidity(minMessage);
       } else {
         node.setCustomValidity('');
