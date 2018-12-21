@@ -16,6 +16,7 @@
 
   type.addEventListener('change', function () {
     var typeIndex = form.querySelector('#type').selectedIndex;
+    debugger;
     switch (typeIndex) {
       case 0:
         minPrice = 0;

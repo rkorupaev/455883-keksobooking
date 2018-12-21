@@ -9,6 +9,8 @@
   var MAIN_PIN_WIDTH = 65;
   var MAX_INPUT_LENGTH = 100;
   var MIN_INPUT_LENGTH = 30;
+  var PIN_SHIFT_X = 32;
+  var PIN_SHIFT_Y = 87;
 
   function disableElements(array) {
     for (var i = 0; i < array.length; i++) {
@@ -123,14 +125,20 @@
   }
 
   function resetPage() {
+    // debugger;
     var map = document.querySelector('.map');
     var form = document.querySelector('.ad-form');
     var announcementsFilterForm = document.querySelector('.ad-form');
     var fieldsetList = announcementsFilterForm.getElementsByTagName('fieldset');
     var capacitySelect = document.getElementById('capacity');
     var addressInput = document.getElementById('address');
+    var pinMain = map.querySelector('.map__pin--main');
 
-    addressInput.value = INITIAL_POSITION_MAIN_PIN_X + (MAIN_PIN_WIDTH / 2) + ' , ' + (INITIAL_POSITION_MAIN_PIN_Y + 85);
+
+    pinMain.style.left = INITIAL_POSITION_MAIN_PIN_X + 'px';
+    pinMain.style.top = INITIAL_POSITION_MAIN_PIN_Y + 'px';
+
+
     map.classList.add('map--faded');
     form.classList.add('ad-form--disabled');
     clearMap();
@@ -138,6 +146,8 @@
     capacitySelect.selectedIndex = 2;
     window.util.disableElements(fieldsetList);
     window.info.initInfo = null;
+    window.util.setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X,
+        parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
   }
 
   function onSuccessHandler(container, succesMessageWindow) {
