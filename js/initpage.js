@@ -22,7 +22,7 @@
     var initialLocationX = evt.clientX;
     var initialLocationY = evt.clientY;
 
-    var onMouseMove = function (moveEvt) {
+    function onMouseMove(moveEvt) {
       moveEvt.preventDefault();
 
       var shift = {
@@ -49,9 +49,9 @@
       window.util.setAddressCoordinates(parseInt(pinMain.style.left, 10) + PIN_SHIFT_X,
           parseInt(pinMain.style.top, 10) + PIN_SHIFT_Y, addressInput);
 
-    };
+    }
 
-    var onMouseUp = function (upEvt) {
+    function onMouseUp(upEvt) {
       upEvt.preventDefault();
       if (!window.info.initInfo) {
         window.backend.load(function (data) {
@@ -60,13 +60,12 @@
           announcementsFilterForm.classList.remove('ad-form--disabled');
           window.util.enableElements(fieldsetList);
           window.util.createPins(window.info.initInfo);
-        }, function () {
-        });
+        }, function () {});
       }
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-    };
+    }
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
