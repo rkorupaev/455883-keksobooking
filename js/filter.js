@@ -37,6 +37,8 @@
   }
   ];
 
+  var lastTimeout;
+
   filterForm.addEventListener('change', function (evt) {
     var filteredAnnouncements = window.info.initInfo;
 
@@ -104,7 +106,10 @@
       }
     }
 
-    window.setTimeout(function () {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(function () {
       window.util.clearMap();
       window.util.createPins(filteredAnnouncements);
     }, 500);
