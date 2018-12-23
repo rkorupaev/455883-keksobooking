@@ -44,7 +44,7 @@
       if ('offer' in infoArray[i]) {
         var pin = pinTemplate.cloneNode(true);
         var pinImg = pin.querySelector('img');
-        pin.style= 'left: ' + infoArray[i].location.x + 'px; top: ' + infoArray[i].location.y + 'px;';
+        pin.style = 'left: ' + infoArray[i].location.x + 'px; top: ' + infoArray[i].location.y + 'px;';
         pinImg.src = infoArray[i].author.avatar;
         pinImg.alt = infoArray[i].offer.title;
         pins.push(pin);
@@ -158,7 +158,7 @@
     var mapElementsToDelete = map.querySelectorAll('.map__pin + :not(.map__pin--main');
     var pinContainer = map.querySelector('.map__pins');
     var card = map.querySelector('.map__card');
-    mapElementsToDelete.forEach(function(element) {
+    mapElementsToDelete.forEach(function (element) {
       pinContainer.removeChild(element);
     });
     if (card) {

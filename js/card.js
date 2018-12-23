@@ -19,7 +19,7 @@
 
     var featuresNodesArray = card.querySelectorAll('.popup__feature');
 
-    featuresNodesArray.forEach(function(node) {
+    featuresNodesArray.forEach(function (node) {
       if (node.textContent.length === 0) {
         node.parentNode.removeChild(node);
       }
