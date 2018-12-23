@@ -17,43 +17,42 @@
 
   var type = form.querySelector('#type');
   var minPrice = INITIAL_PRICE;
-  var price = form.querySelector('#price');
-  price.placeholder = INITIAL_PRICE;
+  priceInput.placeholder = INITIAL_PRICE;
 
   type.addEventListener('change', function () {
-    var typeIndex = form.querySelector('#type').selectedIndex;
+    var typeIndex = type.selectedIndex;
     switch (typeIndex) {
       case 0:
         minPrice = MIN_BUNGALO_PRICE;
-        price.placeholder = MIN_BUNGALO_PRICE;
+        priceInput.placeholder = MIN_BUNGALO_PRICE;
         break;
       case 1:
         minPrice = MIN_FLAT_PRICE;
-        price.placeholder = MIN_FLAT_PRICE;
+        priceInput.placeholder = MIN_FLAT_PRICE;
         break;
       case 2:
         minPrice = MIN_HOUSE_FLAT;
-        price.placeholder = MIN_HOUSE_FLAT;
+        priceInput.placeholder = MIN_HOUSE_FLAT;
         break;
       case 3:
         minPrice = MIN_PALACE_PRICE;
-        price.placeholder = MIN_PALACE_PRICE;
+        priceInput.placeholder = MIN_PALACE_PRICE;
         break;
     }
     checkPrice();
   });
 
   function checkPrice() {
-    if (price.value >= 1000000 || price.value <= minPrice) {
-      price.setCustomValidity('Цена за ночь должна быть от ' + minPrice + ' до 1000000.');
-      price.style.border = '1px solid red';
+    if (priceInput.value >= 1000000 || priceInput.value <= minPrice) {
+      priceInput.setCustomValidity('Цена за ночь должна быть от ' + minPrice + ' до 1000000.');
+      priceInput.style.border = '1px solid red';
     } else {
-      price.setCustomValidity('');
-      price.style.border = '';
+      priceInput.setCustomValidity('');
+      priceInput.style.border = '';
     }
   }
 
-  price.addEventListener('input', checkPrice);
+  priceInput.addEventListener('input', checkPrice);
 
   var timeIn = form.querySelector('#timein');
   var timeOut = form.querySelector('#timeout');

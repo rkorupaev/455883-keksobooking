@@ -43,9 +43,10 @@
     for (var i = 0; i < pinsNumber; i++) {
       if ('offer' in infoArray[i]) {
         var pin = pinTemplate.cloneNode(true);
-        pin.style = 'left: ' + infoArray[i].location.x + 'px; top: ' + infoArray[i].location.y + 'px;';
-        pin.querySelector('img').src = infoArray[i].author.avatar;
-        pin.querySelector('img').alt = infoArray[i].offer.title;
+        var pinImg = pin.querySelector('img');
+        pin.style= 'left: ' + infoArray[i].location.x + 'px; top: ' + infoArray[i].location.y + 'px;';
+        pinImg.src = infoArray[i].author.avatar;
+        pinImg.alt = infoArray[i].offer.title;
         pins.push(pin);
 
         onPinButtonClickHandler(pin, infoArray[i]);
@@ -57,12 +58,13 @@
   }
 
   function onPinButtonClickHandler(pin, announcementInfo) {
+    var map = document.querySelector('.map');
     pin.addEventListener('click', function () {
-      var tempoDom = document.querySelector('.map').querySelector('.popup');
+      var tempoDom = map.querySelector('.popup');
       if (tempoDom === null) {
         window.card.show(announcementInfo);
       } else {
-        var articleDom = document.querySelector('.map').querySelector('.popup');
+        var articleDom = map.querySelector('.popup');
         onCardCloseHandler(articleDom);
         window.card.show(announcementInfo);
       }
@@ -70,13 +72,14 @@
   }
 
   function onPinButtonKeydownHandler(announcementInfo) {
+    var map = document.querySelector('.map');
     document.addEventListener('keydown', function (evt) {
-      var tempoDom = document.querySelector('.map').querySelector('.popup');
+      var tempoDom = map.querySelector('.popup');
       if (evt.keyCode === ENTER_KEY_CODE) {
         if (tempoDom === null) {
           window.card.show(announcementInfo);
         } else {
-          var articleDom = document.querySelector('.map').querySelector('.popup');
+          var articleDom = map.querySelector('.popup');
           onCardCloseHandler(articleDom);
           window.card.show(announcementInfo);
         }
