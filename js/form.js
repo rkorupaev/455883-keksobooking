@@ -1,6 +1,12 @@
 'use strict';
 
 (function () {
+  var INITIAL_PRICE = 1000;
+  var MIN_BUNGALO_PRICE = 0;
+  var MIN_FLAT_PRICE = 1000;
+  var MIN_HOUSE_FLAT = 5000;
+  var MIN_PALACE_PRICE = 10000;
+
   var form = document.querySelector('.ad-form');
   var titleInput = form.querySelector('#title');
   var priceInput = form.querySelector('#price');
@@ -10,28 +16,28 @@
   priceInput.required = true;
 
   var type = form.querySelector('#type');
-  var minPrice = 1000;
+  var minPrice = INITIAL_PRICE;
   var price = form.querySelector('#price');
-  price.placeholder = '1000';
+  price.placeholder = INITIAL_PRICE;
 
   type.addEventListener('change', function () {
     var typeIndex = form.querySelector('#type').selectedIndex;
     switch (typeIndex) {
       case 0:
-        minPrice = 0;
-        price.placeholder = '0';
+        minPrice = MIN_BUNGALO_PRICE;
+        price.placeholder = MIN_BUNGALO_PRICE;
         break;
       case 1:
-        minPrice = 1000;
-        price.placeholder = '1000';
+        minPrice = MIN_FLAT_PRICE;
+        price.placeholder = MIN_FLAT_PRICE;
         break;
       case 2:
-        minPrice = 5000;
-        price.placeholder = '5000';
+        minPrice = MIN_HOUSE_FLAT;
+        price.placeholder = MIN_HOUSE_FLAT;
         break;
       case 3:
-        minPrice = 10000;
-        price.placeholder = '10000';
+        minPrice = MIN_PALACE_PRICE;
+        price.placeholder = MIN_PALACE_PRICE;
         break;
     }
     checkPrice();

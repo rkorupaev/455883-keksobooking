@@ -53,7 +53,7 @@
     var photoBlock = document.querySelector('.popup__photos');
     var fragment = document.createDocumentFragment();
     imgTag.remove();
-    for (var i = 0; i < array.length; i++) {
+    for (var i = 0; i < announcementPhotos.length; i++) {
       photos[i] = imgTag.cloneNode(true);
 
       fragment.appendChild(photos[i]);

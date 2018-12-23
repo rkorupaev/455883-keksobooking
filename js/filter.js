@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+  var MIN_RANGE_PRICE = 10000;
+  var MAX_RANGE_PRICE = 50000;
+  var DELAY = 500;
+
   var filterForm = document.querySelector('.map__filters');
   var typeFilter = document.getElementById('housing-type');
   var typeFilterOptionList = typeFilter.querySelectorAll('option');
@@ -70,14 +74,13 @@
         if (currentFilters[i].value !== 'any') {
           filteredAnnouncements = filteredAnnouncements.filter(function (announcement) {
             var price = announcement.offer[currentFilters[i].offer];
-
             switch (currentFilters[i].value) {
               case 'middle':
-                return price > 10000 && price < 50000;
+                return price > MIN_RANGE_PRICE && price < MAX_RANGE_PRICE;
               case 'low':
-                return price < 10000;
-              case 'hign':
-                return price > 50000;
+                return price < MIN_RANGE_PRICE;
+              case 'high':
+                return price > MAX_RANGE_PRICE;
               default:
                 return false;
             }
@@ -113,6 +116,6 @@
     lastTimeout = window.setTimeout(function () {
       window.util.clearMap();
       window.util.createPins(filteredAnnouncements);
-    }, 500);
+    }, DELAY);
   });
 })();
