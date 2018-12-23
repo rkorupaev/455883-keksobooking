@@ -47,7 +47,7 @@
     window.util.onEscKeydownHandler(articleDom);
   }
 
-  function makePhotoBlock(array) {
+  function makePhotoBlock(announcementPhotos) {
     var photos = [];
     var imgTag = document.querySelector('.popup__photos').querySelector('img');
     var photoBlock = document.querySelector('.popup__photos');
