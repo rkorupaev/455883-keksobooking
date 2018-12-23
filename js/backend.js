@@ -2,10 +2,10 @@
 
 (function () {
   var STATUS_CODE_OK = 200;
+  var UPLOAD_URL = 'https://js.dump.academy/keksobooking';
+  var DOWNLOAD_URL = 'https://js.dump.academy/keksobooking/data';
 
   function upload(data, onLoad, onError) {
-    var uploadURL = 'https://js.dump.academy/keksobooking';
-
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -27,16 +27,14 @@
 
     xhr.timeout = 10000;
 
-    xhr.open('POST', uploadURL);
+    xhr.open('POST', UPLOAD_URL);
     xhr.send(data);
   }
 
   function load(onLoad, onError) {
-    var downloadURL = 'https://js.dump.academy/keksobooking/data';
-
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    xhr.open('GET', downloadURL);
+    xhr.open('GET', DOWNLOAD_URL);
 
     xhr.addEventListener('load', function () {
       if (xhr.status === STATUS_CODE_OK) {
