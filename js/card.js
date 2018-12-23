@@ -19,11 +19,11 @@
 
     var featuresNodesArray = card.querySelectorAll('.popup__feature');
 
-    for (var j = 0; j < featuresNodesArray.length; j++) {
-      if (featuresNodesArray[j].textContent.length === 0) {
-        featuresNodesArray[j].parentNode.removeChild(featuresNodesArray[j]);
+    featuresNodesArray.forEach(function(node) {
+      if (node.textContent.length === 0) {
+        node.parentNode.removeChild(node);
       }
-    }
+    });
 
     var mapFilterContainer = document.querySelector('.map__filters-container');
     var cardList = document.querySelector('.map');

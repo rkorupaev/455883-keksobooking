@@ -152,12 +152,12 @@
 
   function clearMap() {
     var map = document.querySelector('.map');
-    var mapElementsToDelete = map.querySelectorAll('.map__pin');
+    var mapElementsToDelete = map.querySelectorAll('.map__pin + :not(.map__pin--main');
     var pinContainer = map.querySelector('.map__pins');
     var card = map.querySelector('.map__card');
-    for (var i = 1; i < mapElementsToDelete.length; i++) {
-      pinContainer.removeChild(mapElementsToDelete[i]);
-    }
+    mapElementsToDelete.forEach(function(element) {
+      pinContainer.removeChild(element);
+    });
     if (card) {
       card.remove();
     }
